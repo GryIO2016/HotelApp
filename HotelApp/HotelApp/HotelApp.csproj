@@ -75,6 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoginModule\Logging.cs" />
+    <Compile Include="LoginModule\LoggingWindow.xaml.cs" />
+    <Compile Include="LoginModule\RegisterWindow..xaml.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
@@ -121,7 +124,6 @@
   <ItemGroup>
     <Folder Include="Classes\" />
     <Folder Include="Database\" />
-    <Folder Include="LoginModule\" />
     <Folder Include="Reservations\" />
     <Folder Include="RoomService\" />
     <Folder Include="Statistics\" />
