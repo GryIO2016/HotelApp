@@ -121,7 +121,7 @@
   <ItemGroup>
     <Folder Include="Classes\" />
     <Folder Include="Database\" />
-    <Folder Include="Login Module\" />
+    <Folder Include="LoginModule\" />
     <Folder Include="Reservations\" />
     <Folder Include="RoomService\" />
     <Folder Include="Statistics\" />
