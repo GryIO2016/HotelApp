@@ -92,6 +92,11 @@
     <Compile Include="LoginModule\Logging.cs" />
     <Compile Include="LoginModule\LoggingWindow.xaml.cs" />
     <Compile Include="LoginModule\RegisterWindow..xaml.cs" />
+    <Compile Include="Reservations\IReservationData.cs" />
+    <Compile Include="Reservations\IReservationUI.cs" />
+    <Compile Include="Reservations\ReservationDataService.cs" />
+    <Compile Include="Reservations\ReservationStorage.cs" />
+    <Compile Include="Reservations\ReservationUIService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="LoginModule\LoggingWindow.xaml">
@@ -145,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />
-    <Folder Include="Reservations\" />
     <Folder Include="RoomService\" />
     <Folder Include="Statistics\" />
     <Folder Include="Timetable\" />

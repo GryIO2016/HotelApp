@@ -15,6 +15,7 @@ namespace HotelApp.Database
         public bool Paid { get; set; }
         public User User { get; set; }
         public List<Room> Rooms { get; set; }
+        public bool Canceled { get; set; }
 
         public Reservation(int id, User client, DateTime checkInDate, DateTime checkOutDate, List<Room> rooms)
         {
@@ -23,6 +24,7 @@ namespace HotelApp.Database
             CheckInDate = checkInDate;
             CheckOutDate = checkOutDate;
             Rooms = rooms;
+            Canceled = false;
         }
 
         public double CountTotalPrice()
