@@ -17,6 +17,10 @@ namespace HotelApp.Database
         public List<Room> Rooms { get; set; }
         public bool Canceled { get; set; }
 
+        public Reservation()
+        {
+        }
+
         public Reservation(int id, User client, DateTime checkInDate, DateTime checkOutDate, List<Room> rooms)
         {
             Id = id;
@@ -25,6 +29,31 @@ namespace HotelApp.Database
             CheckOutDate = checkOutDate;
             Rooms = rooms;
             Canceled = false;
+            Confirmed = false;
+
+        }
+
+        public Reservation(int id, User client, DateTime checkInDate, DateTime checkOutDate, bool confirmed, bool paid, List<Room> rooms, bool canceled)
+        {
+            Id = id;
+            User = client;
+            CheckInDate = checkInDate;
+            CheckOutDate = checkOutDate;
+            Confirmed = confirmed;
+            Paid = paid;
+            Rooms = rooms;
+            Canceled = canceled;
+        }
+
+        public Reservation(User client, DateTime checkInDate, DateTime checkOutDate, bool confirmed, bool paid, List<Room> rooms, bool canceled)
+        {
+            User = client;
+            CheckInDate = checkInDate;
+            CheckOutDate = checkOutDate;
+            Confirmed = confirmed;
+            Paid = paid;
+            Rooms = rooms;
+            Canceled = canceled;
         }
 
         public double CountTotalPrice()
@@ -39,6 +68,16 @@ namespace HotelApp.Database
             }
 
             return TotalPrice;
+        }
+
+        public void toString()
+        {
+            Console.WriteLine("Reservation " + Id + ", " + CheckInDate + ", " + CheckOutDate + ", confirmed: " + Confirmed + ", paid: " + Paid + ", canceled: " + Canceled);
+            User.toString();
+            foreach (Room r in Rooms)
+            {
+                r.toString();
+            }
         }
     }
 }

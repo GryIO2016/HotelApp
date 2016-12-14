@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IO2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bed_types">
+          <Key>
+            <PropertyRef Name="bed_type_id" />
+          </Key>
+          <Property Name="bed_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reservations">
+          <Key>
+            <PropertyRef Name="reservation_id" />
+          </Key>
+          <Property Name="reservation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="check_in" Type="smalldatetime" Nullable="false" />
+          <Property Name="check_out" Type="smalldatetime" Nullable="false" />
+          <Property Name="confirmed" Type="bit" Nullable="false" />
+          <Property Name="paid" Type="bit" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="canceled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reservations_rooms">
+          <Key>
+            <PropertyRef Name="reservation_id" />
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="reservation_id" Type="int" Nullable="false" />
+          <Property Name="room_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="room_statuses">
+          <Key>
+            <PropertyRef Name="room_status_id" />
+          </Key>
+          <Property Name="room_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="room_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="smoking" Type="bit" Nullable="false" />
+          <Property Name="pets" Type="bit" Nullable="false" />
+          <Property Name="room_status" Type="int" Nullable="false" />
+          <Property Name="bed_type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="birth_date" Type="smalldatetime" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="20" />
+          <Property Name="pesel" Type="varchar" MaxLength="15" />
+          <Property Name="role" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="reservation_user_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reservations" Type="Self.reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reservations">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="room_bed_type_fk">
+          <End Role="bed_types" Type="Self.bed_types" Multiplicity="1" />
+          <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bed_types">
+              <PropertyRef Name="bed_type_id" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="bed_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="room_status_fk">
+          <End Role="room_statuses" Type="Self.room_statuses" Multiplicity="1" />
+          <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_statuses">
+              <PropertyRef Name="room_status_id" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="room_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rr_reserv_fk">
+          <End Role="reservations" Type="Self.reservations" Multiplicity="1" />
+          <End Role="reservations_rooms" Type="Self.reservations_rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservations">
+              <PropertyRef Name="reservation_id" />
+            </Principal>
+            <Dependent Role="reservations_rooms">
+              <PropertyRef Name="reservation_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rr_room_fk">
+          <End Role="rooms" Type="Self.rooms" Multiplicity="1" />
+          <End Role="reservations_rooms" Type="Self.reservations_rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="room_id" />
+            </Principal>
+            <Dependent Role="reservations_rooms">
+              <PropertyRef Name="room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role_fk">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IO2017ModelStoreContainer">
+          <EntitySet Name="bed_types" EntityType="Self.bed_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reservations" EntityType="Self.reservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reservations_rooms" EntityType="Self.reservations_rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="room_statuses" EntityType="Self.room_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rooms" EntityType="Self.rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="reservation_user_fk" Association="Self.reservation_user_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="reservations" EntitySet="reservations" />
+          </AssociationSet>
+          <AssociationSet Name="room_bed_type_fk" Association="Self.room_bed_type_fk">
+            <End Role="bed_types" EntitySet="bed_types" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="room_status_fk" Association="Self.room_status_fk">
+            <End Role="room_statuses" EntitySet="room_statuses" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="rr_reserv_fk" Association="Self.rr_reserv_fk">
+            <End Role="reservations" EntitySet="reservations" />
+            <End Role="reservations_rooms" EntitySet="reservations_rooms" />
+          </AssociationSet>
+          <AssociationSet Name="rr_room_fk" Association="Self.rr_room_fk">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="reservations_rooms" EntitySet="reservations_rooms" />
+          </AssociationSet>
+          <AssociationSet Name="user_role_fk" Association="Self.user_role_fk">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IO2017Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bed_types">
+          <Key>
+            <PropertyRef Name="bed_type_id" />
+          </Key>
+          <Property Name="bed_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rooms" Relationship="Self.room_bed_type_fk" FromRole="bed_types" ToRole="rooms" />
+        </EntityType>
+        <EntityType Name="reservations">
+          <Key>
+            <PropertyRef Name="reservation_id" />
+          </Key>
+          <Property Name="reservation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="check_in" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="check_out" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="confirmed" Type="Boolean" Nullable="false" />
+          <Property Name="paid" Type="Boolean" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.reservation_user_fk" FromRole="reservations" ToRole="users" />
+          <NavigationProperty Name="rooms" Relationship="Self.reservations_rooms" FromRole="reservations" ToRole="rooms" />
+          <Property Name="canceled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.user_role_fk" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="room_statuses">
+          <Key>
+            <PropertyRef Name="room_status_id" />
+          </Key>
+          <Property Name="room_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rooms" Relationship="Self.room_status_fk" FromRole="room_statuses" ToRole="rooms" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="room_id" />
+          </Key>
+          <Property Name="room_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="smoking" Type="Boolean" Nullable="false" />
+          <Property Name="pets" Type="Boolean" Nullable="false" />
+          <Property Name="room_status" Type="Int32" Nullable="false" />
+          <Property Name="bed_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bed_types" Relationship="Self.room_bed_type_fk" FromRole="rooms" ToRole="bed_types" />
+          <NavigationProperty Name="room_statuses" Relationship="Self.room_status_fk" FromRole="rooms" ToRole="room_statuses" />
+          <NavigationProperty Name="reservations" Relationship="Self.reservations_rooms" FromRole="rooms" ToRole="reservations" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birth_date" Type="DateTime" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pesel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="reservations" Relationship="Self.reservation_user_fk" FromRole="users" ToRole="reservations" />
+          <NavigationProperty Name="roles" Relationship="Self.user_role_fk" FromRole="users" ToRole="roles" />
+        </EntityType>
+        <Association Name="room_bed_type_fk">
+          <End Role="bed_types" Type="Self.bed_types" Multiplicity="1" />
+          <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bed_types">
+              <PropertyRef Name="bed_type_id" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="bed_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reservation_user_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reservations" Type="Self.reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reservations">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role_fk">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="room_status_fk">
+          <End Role="room_statuses" Type="Self.room_statuses" Multiplicity="1" />
+          <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_statuses">
+              <PropertyRef Name="room_status_id" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="room_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reservations_rooms">
+          <End Role="reservations" Type="Self.reservations" Multiplicity="*" />
+          <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="IO2017Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bed_types" EntityType="Self.bed_types" />
+          <EntitySet Name="reservations" EntityType="Self.reservations" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="room_statuses" EntityType="Self.room_statuses" />
+          <EntitySet Name="rooms" EntityType="Self.rooms" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="room_bed_type_fk" Association="Self.room_bed_type_fk">
+            <End Role="bed_types" EntitySet="bed_types" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="reservation_user_fk" Association="Self.reservation_user_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="reservations" EntitySet="reservations" />
+          </AssociationSet>
+          <AssociationSet Name="user_role_fk" Association="Self.user_role_fk">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="room_status_fk" Association="Self.room_status_fk">
+            <End Role="room_statuses" EntitySet="room_statuses" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="reservations_rooms" Association="Self.reservations_rooms">
+            <End Role="reservations" EntitySet="reservations" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IO2017ModelStoreContainer" CdmEntityContainer="IO2017Entities">
+          <EntitySetMapping Name="bed_types">
+            <EntityTypeMapping TypeName="IO2017Model.bed_types">
+              <MappingFragment StoreEntitySet="bed_types">
+                <ScalarProperty Name="bed_type_id" ColumnName="bed_type_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reservations">
+            <EntityTypeMapping TypeName="IO2017Model.reservations">
+              <MappingFragment StoreEntitySet="reservations">
+                <ScalarProperty Name="canceled" ColumnName="canceled" />
+                <ScalarProperty Name="reservation_id" ColumnName="reservation_id" />
+                <ScalarProperty Name="check_in" ColumnName="check_in" />
+                <ScalarProperty Name="check_out" ColumnName="check_out" />
+                <ScalarProperty Name="confirmed" ColumnName="confirmed" />
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="IO2017Model.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_statuses">
+            <EntityTypeMapping TypeName="IO2017Model.room_statuses">
+              <MappingFragment StoreEntitySet="room_statuses">
+                <ScalarProperty Name="room_status_id" ColumnName="room_status_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="IO2017Model.rooms">
+              <MappingFragment StoreEntitySet="rooms">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="smoking" ColumnName="smoking" />
+                <ScalarProperty Name="pets" ColumnName="pets" />
+                <ScalarProperty Name="room_status" ColumnName="room_status" />
+                <ScalarProperty Name="bed_type" ColumnName="bed_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="IO2017Model.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="pesel" ColumnName="pesel" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="reservations_rooms" TypeName="IO2017Model.reservations_rooms" StoreEntitySet="reservations_rooms">
+            <EndProperty Name="reservations">
+              <ScalarProperty Name="reservation_id" ColumnName="reservation_id" />
+            </EndProperty>
+            <EndProperty Name="rooms">
+              <ScalarProperty Name="room_id" ColumnName="room_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

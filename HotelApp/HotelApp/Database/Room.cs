@@ -27,5 +27,14 @@ namespace HotelApp.Database
             BedType = bedType;
             RoomStatus = status;
         }
+
+        public Room()
+        {
+        }
+
+        public void toString()
+        {
+            Console.WriteLine("Room " + Id + ", " + Number + ", " + Price + ", smoking: " + Smoking + ", pets: " + Pets + ", " + BedType + ", " + RoomStatus);
+        }
     }
 }

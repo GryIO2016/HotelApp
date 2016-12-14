@@ -15,9 +15,13 @@ namespace HotelApp.Database
         public String Phone { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
+        public String Pesel { get; set; }
         public EnumHelper.Role Role { get; set; }
 
-        public User(int id, String name, String lastName, DateTime birthDate, String phone, string email, String password, EnumHelper.Role role)
+        public User()
+        { }
+
+        public User(int id, String name, String lastName, DateTime birthDate, String phone, string email, String password, String pesel, EnumHelper.Role role)
         {
             Id = id;
             Name = name;
@@ -26,7 +30,27 @@ namespace HotelApp.Database
             Phone = phone;
             Email = email;
             Password = password;
+            Pesel = pesel;
             Role = role;
         }
+
+        public User(String name, String lastName, DateTime birthDate, String phone, string email, String password, String pesel, EnumHelper.Role role)
+        {
+            Name = name;
+            LastName = lastName;
+            BirthDate = birthDate;
+            Phone = phone;
+            Email = email;
+            Password = password;
+            Pesel = pesel;
+            Role = role;
+        }
+
+        public void toString()
+        {
+            Console.WriteLine("User " + Id + ": " + Name + " " + LastName + ", " + BirthDate + ", " + Phone + ", "
+                + Email + ", " + Password + ", " + Pesel + ", " + Role);
+        }
+
     }
 }
