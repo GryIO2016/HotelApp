@@ -20,9 +20,10 @@
           <Property Name="check_in" Type="smalldatetime" Nullable="false" />
           <Property Name="check_out" Type="smalldatetime" Nullable="false" />
           <Property Name="confirmed" Type="bit" Nullable="false" />
-          <Property Name="paid" Type="bit" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="canceled" Type="bit" Nullable="false" />
+          <Property Name="total_price" Type="money" />
+          <Property Name="paid" Type="money" />
         </EntityType>
         <EntityType Name="reservations_rooms">
           <Key>
@@ -197,11 +198,12 @@
           <Property Name="check_in" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="check_out" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="confirmed" Type="Boolean" Nullable="false" />
-          <Property Name="paid" Type="Boolean" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="users" Relationship="Self.reservation_user_fk" FromRole="reservations" ToRole="users" />
           <NavigationProperty Name="rooms" Relationship="Self.reservations_rooms" FromRole="reservations" ToRole="rooms" />
           <Property Name="canceled" Type="Boolean" Nullable="false" />
+          <Property Name="total_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="paid" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="roles">
           <Key>
@@ -347,12 +349,13 @@
           <EntitySetMapping Name="reservations">
             <EntityTypeMapping TypeName="IO2017Model.reservations">
               <MappingFragment StoreEntitySet="reservations">
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
                 <ScalarProperty Name="canceled" ColumnName="canceled" />
                 <ScalarProperty Name="reservation_id" ColumnName="reservation_id" />
                 <ScalarProperty Name="check_in" ColumnName="check_in" />
                 <ScalarProperty Name="check_out" ColumnName="check_out" />
                 <ScalarProperty Name="confirmed" ColumnName="confirmed" />
-                <ScalarProperty Name="paid" ColumnName="paid" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>

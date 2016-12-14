@@ -24,9 +24,10 @@ namespace HotelApp.Database
         public System.DateTime check_in { get; set; }
         public System.DateTime check_out { get; set; }
         public bool confirmed { get; set; }
-        public bool paid { get; set; }
         public int user_id { get; set; }
         public bool canceled { get; set; }
+        public Nullable<decimal> total_price { get; set; }
+        public Nullable<decimal> paid { get; set; }
     
         public virtual users users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -18,7 +18,8 @@ namespace HotelApp.Database
                 r.check_in = reservation.CheckInDate;
                 r.check_out = reservation.CheckOutDate;
                 r.confirmed = reservation.Confirmed;
-                r.paid = reservation.Paid;
+                r.paid = (decimal) reservation.Paid;
+                r.total_price = (decimal) reservation.TotalPrice;
                 r.user_id = reservation.User.Id;
                 r.canceled = reservation.Canceled;
 
@@ -83,7 +84,8 @@ namespace HotelApp.Database
                     reservation.check_in = newReservation.CheckInDate;
                     reservation.check_out = newReservation.CheckOutDate;
                     reservation.confirmed = newReservation.Confirmed;
-                    reservation.paid = newReservation.Paid;
+                    reservation.paid = (decimal)newReservation.Paid;
+                    reservation.total_price = (decimal)newReservation.TotalPrice;
                     reservation.user_id = newReservation.User.Id;
                     reservation.canceled = newReservation.Canceled;
 
@@ -128,7 +130,7 @@ namespace HotelApp.Database
 
                     User user = new User(u.user_id, u.first_name, u.last_name, (DateTime)u.birth_date, u.phone_number, u.email, u.password, u.pesel, (EnumHelper.Role)u.role);
 
-                    reservations.Add(new Reservation(reservation.reservation_id, user, reservation.check_in, reservation.check_out, reservation.confirmed, reservation.paid ,rooms, reservation.canceled));
+                    reservations.Add(new Reservation(reservation.reservation_id, user, reservation.check_in, reservation.check_out, reservation.confirmed, (double)reservation.paid , (double)reservation.total_price, rooms, reservation.canceled));
                 }
             }
 
@@ -152,7 +154,7 @@ namespace HotelApp.Database
                         Room room = new Room(r.room_id, r.number, (double)r.price, r.smoking, r.pets, (EnumHelper.BedType)r.bed_type, (EnumHelper.Status)r.room_status);
                         rooms.Add(room);
                     }
-                    reservations.Add(new Reservation(reservation.reservation_id, user, reservation.check_in, reservation.check_out, reservation.confirmed, reservation.paid, rooms, reservation.canceled));
+                    reservations.Add(new Reservation(reservation.reservation_id, user, reservation.check_in, reservation.check_out, reservation.confirmed, (double)reservation.paid, (double)reservation.total_price, rooms, reservation.canceled));
                 }
             }
 
