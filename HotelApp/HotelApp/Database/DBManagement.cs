@@ -40,7 +40,37 @@ namespace HotelApp.Database
 
         public List<Room> getFreeRooms(DateTime startDate, DateTime endTime)
         {
-            throw new NotImplementedException();
+            List<Room> fRrooms = new List<Room>();
+
+            using (var Conn = new IO2017Entities())
+            {
+                //rezerwacje, które znajdują się w danym przedziale lub czesciowo na niego nachodzą
+                var find = from d in Conn.reservations where (
+                        (d.check_in < startDate & d.check_out > endTime) ||
+                        (d.check_in > startDate & d.check_in < endTime) ||
+                        (d.check_out > startDate & d.check_out < endTime)
+                    ) select d;
+
+                // pokoje zarezerwowane w tym czasie
+                List<int> roomsid = new List<int>();
+                foreach (var f in find)
+                {
+                    foreach (rooms r in f.rooms)
+                    {
+                        roomsid.Add(r.room_id);
+                    }
+                }
+
+                // wolne pokoje
+                var free = from q in Conn.rooms where !(roomsid.Contains(q.room_id)) select q;
+
+                foreach (var qq in free)
+                {
+                    fRrooms.Add(new Room(qq.room_id, qq.number, (double)qq.price, qq.smoking, qq.pets, (EnumHelper.BedType)qq.bed_type, (EnumHelper.Status)qq.room_status));
+                }
+
+            }
+            return fRrooms;
         }
 
         public void editReservation(Reservation oldReservation, Reservation newReservation)
