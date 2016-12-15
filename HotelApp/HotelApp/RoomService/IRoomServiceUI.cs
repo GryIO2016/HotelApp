@@ -9,7 +9,7 @@ namespace HotelApp.RoomService
 {
     public interface IRoomServiceUI
     {
-        bool acceptReservation();
+        bool acceptReservation(Reservation res);
         bool editReservation();
         bool editRoom();
         String notification();
