@@ -167,6 +167,10 @@
     <Compile Include="Statistics\StatisticsWindow.xaml.cs">
       <DependentUpon>StatisticsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Timetable\Calendar.cs" />
+    <Compile Include="Timetable\ICalendar.cs" />
+    <Compile Include="Timetable\IReservationProcedures.cs" />
+    <Compile Include="Timetable\ReservationNotFoundException.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="LoginModule\LoggingWindow.xaml">
@@ -238,7 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />
-    <Folder Include="Timetable\" />
     <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
