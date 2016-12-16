@@ -171,6 +171,14 @@
     <Compile Include="Timetable\ICalendar.cs" />
     <Compile Include="Timetable\IReservationProcedures.cs" />
     <Compile Include="Timetable\ReservationNotFoundException.cs" />
+    <Compile Include="UI\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserMessage.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="LoginModule\LoggingWindow.xaml">
@@ -200,6 +208,14 @@
     <Page Include="Statistics\StatisticsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -242,7 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />
-    <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\Model1.Context.tt">

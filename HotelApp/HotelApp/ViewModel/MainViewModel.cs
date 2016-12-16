@@ -1,4 +1,8 @@
 using GalaSoft.MvvmLight;
+using HotelApp.Database;
+using HotelApp.UI;
+using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace HotelApp.ViewModel
 {
@@ -16,11 +20,43 @@ namespace HotelApp.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private User currentUser;
+        private List<UserControl> views;
+        private UserControl currentView;
+
+        public UserControl CurrentView
+        {
+            get
+            {
+                return currentView;
+            }
+            set
+            {
+                currentView = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public User CurrentUser
+        {
+            get
+            {
+                return currentUser;
+            }
+            set
+            {
+                currentUser = value;
+                RaisePropertyChanged();
+            }
+        }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
+            MessengerInstance.Register<UserMessage>(this, ChangeCurrentUser);
+            views = new List<UserControl>() { new LoginView() };
+            CurrentView = views[0];
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -29,6 +65,33 @@ namespace HotelApp.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+        }
+
+        private void ChangeCurrentUser(UserMessage msg)
+        {
+            CurrentUser = msg.NewUser;
+            if (CurrentUser == null)
+            {
+                views = new List<UserControl>() { new LoginView() };
+            }
+            else
+            {
+                //Tu zmieniæ dostêpne zak³adki, czyli...
+                //sprawdziæ uprawnienia u¿ytkownika
+                switch (CurrentUser.Role)
+                {
+                    case EnumHelper.Role.Admin: //Je¿eli admin
+                        //views = {...}
+                        break;
+                    case EnumHelper.Role.Client: //Je¿eli klient
+                        //views = {...}
+                        break;
+                    case EnumHelper.Role.Employee: //Je¿eli pracownik
+                        //views = {...}
+                        break;
+                }
+            }
+            CurrentView = views[0];
         }
     }
 }

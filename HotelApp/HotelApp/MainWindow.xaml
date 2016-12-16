@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:vm="clr-namespace:HotelApp.ViewModel"
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" Title="HotelApp" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Frame Content="{Binding CurrentView}" x:Name="WindowContent" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
