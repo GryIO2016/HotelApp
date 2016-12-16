@@ -16,9 +16,9 @@ namespace HotelApp.Reservations
         List<Room> getRooms(EnumHelper.BedType bedType, List<Room> rooms);
         List<Room> getRooms(DateTime checkinDate, DateTime checkoutDate, List<Room> rooms);
         List<Room> getRooms(EnumHelper.Status status, List<Room> rooms);
-        bool cancelReservation(int id);
-        Reservation getReservation(int id);
-        List<Reservation> getReservations(User client);
-        List<Reservation> getDeletedReservations(User client);
+        bool cancelReservation(int id, List<Reservation> reservations);
+        Reservation getReservation(int id, List<Reservation> reservations);
+        List<Reservation> getReservations(User client, List<Reservation> reservations);
+        List<Reservation> getDeletedReservations(User client, List<Reservation> reservations);
     }
 }

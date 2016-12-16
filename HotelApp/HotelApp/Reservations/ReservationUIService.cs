@@ -10,9 +10,9 @@ namespace HotelApp.Reservations
 {
     public class ReservationUIService : IReservationUI
     {
-        public bool cancelReservation(int id)
+        public bool cancelReservation(int id, List<Reservation> reservations)
         {
-            Reservation found = getReservation(id);
+            Reservation found = getReservation(id, reservations);
 
             if (found == null)
             {
@@ -28,19 +28,35 @@ namespace HotelApp.Reservations
             return new Reservation(id, client, checkinDate, checkoutDate, rooms);
         }
 
-        public List<Reservation> getDeletedReservations(User client)
+        public List<Reservation> getDeletedReservations(User client, List<Reservation> reservations)
         {
-            throw new NotImplementedException();
+            IEnumerable<Reservation> result = from Reservation reservation in reservations
+                                              where reservation.User == client
+                                              select reservation;
+            return result.ToList();
         }
 
-        public Reservation getReservation(int id)
+        public Reservation getReservation(int id, List<Reservation> reservations)
         {
-            throw new NotImplementedException();
+            foreach (Reservation reservation in reservations)
+            {
+                if (reservation.Id == id)
+                {
+                    return reservation;
+                }
+            }
+            return null;
         }
 
-        public List<Reservation> getReservations(User client)
+        public List<Reservation> getReservations(User client, List<Reservation> reservations)
         {
-            throw new NotImplementedException();
+            //Zaimplementowana metoda przez moduł Terminarza
+            //throw new NotImplementedException();
+
+            IEnumerable<Reservation> result = from Reservation reservation in reservations
+                                              where reservation.User == client
+                                              select reservation;
+            return result.ToList();
         }
 
         public List<Room> getRooms(EnumHelper.Status status, List<Room> rooms)
@@ -61,6 +77,7 @@ namespace HotelApp.Reservations
 
         public List<Room> getRooms(DateTime checkinDate, DateTime checkoutDate, List<Room> rooms)
         {
+            //Zaimplementowana metoda przez moduł Terminarza
             throw new NotImplementedException();
         }
 
