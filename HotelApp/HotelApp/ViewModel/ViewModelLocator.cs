@@ -44,6 +44,7 @@ namespace HotelApp.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+            
         }
 
         public MainViewModel Main

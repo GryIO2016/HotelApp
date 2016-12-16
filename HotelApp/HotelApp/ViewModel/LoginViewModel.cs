@@ -5,6 +5,7 @@ using HotelApp.UI;
 using System.Windows;
 using System.Windows.Input;
 using System;
+using LoggingApp;
 
 namespace HotelApp.ViewModel
 {
@@ -50,12 +51,17 @@ namespace HotelApp.ViewModel
 
         private void RegisterCommand()
         {
-            //Otwórz okno RegisterView
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
         }
 
         private void LoginCommand()
         {
-            MessageBox.Show("Brak implementacji ILoggingUI!", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
+            //MessageBox.Show("Brak implementacji ILoggingUI!", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
+            DBManagment testObject = new DBManagment();
+            User testUser = new User();
+            testUser = testObject.findUser("kowalski@a.pl");
+            //MessageBox.Show("Login", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
             //User tempUser = loginUI.Login(LoginText, PasswordText);
             //if (tempUser == null)
             //    MessageBox.Show("Niepoprawna nazwa użytkownika/hasło!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);

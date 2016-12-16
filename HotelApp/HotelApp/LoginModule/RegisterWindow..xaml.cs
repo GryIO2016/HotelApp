@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Liphsoft.Crypto.Argon2;
+using HotelApp.Database;
+
 
 namespace LoggingApp
 {
