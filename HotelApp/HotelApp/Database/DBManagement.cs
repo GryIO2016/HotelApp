@@ -273,5 +273,26 @@ namespace HotelApp.Database
             }
             return room;
         }
+
+        public void editRoom(Room oldRoom, Room newRoom)
+        {
+            using (var Conn = new IO2017Entities())
+            {
+                rooms r = Conn.rooms.Find(oldRoom.Id);
+                if (r != null)
+                {
+                    r.number = newRoom.Number;
+                    
+                    r.price = (decimal)newRoom.Price;
+                    r.smoking = newRoom.Smoking;
+                    r.pets = newRoom.Pets;
+                    r.bed_type = (int)newRoom.BedType;
+                    r.room_status = (int)newRoom.RoomStatus;
+
+
+                    Conn.SaveChanges();
+                }
+            }
+        }
     }
 }
