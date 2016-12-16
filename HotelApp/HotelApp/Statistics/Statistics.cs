@@ -14,7 +14,6 @@ namespace HotelApp.Statistics
         int categoryID;
         bool notInitialized;
         IStatistics interfejs;
-        //ICalendar calendar;
 
         public DateTime StartDate {
             get
@@ -59,7 +58,7 @@ namespace HotelApp.Statistics
         public Statistics ()
         {
             notInitialized = true;
-            interfejs = new IStatisticsImplementation(/*calendar*/);
+            interfejs = new IStatisticsImplementation();
         }
 
         public void updateData()

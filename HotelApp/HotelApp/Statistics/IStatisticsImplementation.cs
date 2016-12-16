@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HotelApp.Database;
+using HotelApp.Timetable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +10,12 @@ namespace HotelApp.Statistics
 {
     class IStatisticsImplementation : IStatistics 
     {
-        //ICalendar calendar;
+        //Tutaj powinna być klasa implementująca ICalendar
+        Calendar calendar; //ICalendar calendar;
 
-        public IStatisticsImplementation(/*ICalendar cal*/)
+        public IStatisticsImplementation()
         {
-            //calendar = cal;
+            calendar = new Calendar();
         }
 
         public void getDailyIncome(Statistics stat)
@@ -21,15 +24,16 @@ namespace HotelApp.Statistics
             while (data<stat.EndDate)
             {
                 double przychod = 0.0;
-                /*foreach (Reservation r in calendar.getReservations(stat.StartDate, stat.EndDate))
+                foreach (Reservation r in calendar.getReservations(stat.StartDate, stat.EndDate))
                 {
-                    if (r.CheckinDate.Date == data) przychod += r.Paid;
-                }*/
+                    if (r.CheckInDate.Date == data) przychod += r.Paid;
+                }
                 stat.StatData.Add(przychod);
                 data = data.AddDays(1.0);
             }
         }
 
+        //Dalsze metody nie są jeszcze zaimplementowane
         public void getFreeRooms(Statistics stat)
         {
             DateTime data = stat.StartDate;
@@ -38,7 +42,7 @@ namespace HotelApp.Statistics
                 double wolne = 0.0;
                 /*foreach (Reservation r in calendar.getReservations(stat.StartDate, stat.EndDate))
                 {
-                    if (r.CheckinDate.Date == data) przychod += r.Paid;
+                    if (r.CheckInDate.Date == data) przychod += r.Paid;
                 }*/
                 stat.StatData.Add(wolne);
                 data = data.AddDays(1.0);
@@ -53,7 +57,7 @@ namespace HotelApp.Statistics
                 double zajetosc = 0.0;
                 /*foreach (Reservation r in calendar.getReservations(stat.StartDate, stat.EndDate))
                 {
-                    if (r.CheckinDate.Date == data) przychod += r.Paid;
+                    if (r.CheckInDate.Date == data) przychod += r.Paid;
                 }*/
                 stat.StatData.Add(zajetosc);
                 data = data.AddDays(1.0);
