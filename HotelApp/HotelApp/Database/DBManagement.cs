@@ -37,9 +37,7 @@ namespace HotelApp.Database
                 Conn.reservations.Add(r);
                 Conn.SaveChanges();
             }
-
         }
-
 
         public List<Room> getFreeRooms(DateTime startDate, DateTime endTime)
         {
@@ -215,14 +213,6 @@ namespace HotelApp.Database
 
         public void editUser(User oldUser, User newUser)
         {
-            try
-            {
-
-            }
-            catch
-            {
-
-            }
             using (var Conn = new IO2017Entities())
             {
                 users u = Conn.users.Find(oldUser.Id);
@@ -300,8 +290,6 @@ namespace HotelApp.Database
             {
                 return null;
             }
-
-
             return user;
         }
 
@@ -339,7 +327,6 @@ namespace HotelApp.Database
 
         public void editRoom(Room oldRoom, Room newRoom)
         {
-
             using (var Conn = new IO2017Entities())
             {
                 rooms r = Conn.rooms.Find(oldRoom.Id);
