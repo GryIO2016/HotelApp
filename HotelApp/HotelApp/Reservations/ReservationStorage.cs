@@ -11,7 +11,7 @@ namespace HotelApp.Reservations
     {
         private static ReservationStorage instance;
         private List<Reservation> reservations;
-        public ReservationStorage()
+        private ReservationStorage()
         {
             reservations = new List<Reservation>();
         }
