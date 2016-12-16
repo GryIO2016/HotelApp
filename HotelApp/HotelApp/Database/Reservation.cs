@@ -65,7 +65,7 @@ namespace HotelApp.Database
             Canceled = canceled;
         }
 
-        //id, daty, client i pokoje; cena całkowita wyliczana automatycznie, boole domyslnie ustawiona na false
+        //id, client, daty i pokoje; cena całkowita wyliczana automatycznie, boole domyslnie ustawiona na false
         public Reservation(int id, User client, DateTime checkInDate, DateTime checkOutDate, List<Room> rooms)
         {
             Id = id;
@@ -73,11 +73,23 @@ namespace HotelApp.Database
             CheckInDate = checkInDate;
             CheckOutDate = checkOutDate;
             Paid = 0;
-            TotalPrice = CountTotalPrice();
             Rooms = rooms;
+            TotalPrice = CountTotalPrice();
             Canceled = false;
             Confirmed = false;
+        }
 
+        //klient, daty i pokoje; cena całkowita wyliczana automatycznie, boole domyslnie ustawiona na false
+        public Reservation(User client, DateTime checkInDate, DateTime checkOutDate, List<Room> rooms)
+        {
+            User = client;
+            CheckInDate = checkInDate;
+            CheckOutDate = checkOutDate;
+            Paid = 0;
+            Rooms = rooms;
+            TotalPrice = CountTotalPrice();
+            Canceled = false;
+            Confirmed = false;
         }
 
         public double CountTotalPrice()
