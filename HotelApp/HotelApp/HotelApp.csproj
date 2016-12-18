@@ -140,9 +140,8 @@
     <Compile Include="Database\users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="LoginModule\Logging.cs" />
-    <Compile Include="LoginModule\LoggingWindow.xaml.cs" />
-    <Compile Include="LoginModule\RegisterWindow..xaml.cs" />
+    <Compile Include="LoginModule\Logger.cs" />
+    <Compile Include="LoginModule\ILoginUI.cs" />
     <Compile Include="Reservations\IReservationData.cs" />
     <Compile Include="Reservations\IReservationUI.cs" />
     <Compile Include="Reservations\ReservationDataService.cs" />
@@ -199,14 +198,6 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="LoginModule\LoggingWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="LoginModule\RegisterWindow..xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

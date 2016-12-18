@@ -30,7 +30,11 @@ namespace HotelApp.LoginModule
             {
                 return true;    //this means that there already IS user with the given e-mail address
             }
-
+            else
+            {
+                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
+                dataBase.addUser(newUser);
+            }
         }
     }
 }
