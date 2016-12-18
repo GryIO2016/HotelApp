@@ -23,9 +23,19 @@ namespace HotelApp.Reservations
             return true;
         }
 
-        public Reservation createReservation(int id, User client, DateTime checkinDate, DateTime checkoutDate, List<Room> rooms)
+        public bool createReservation(User client, DateTime checkinDate, DateTime checkoutDate, List<Room> rooms)
         {
-            return new Reservation(id, client, checkinDate, checkoutDate, rooms);
+            Reservation toAdd = new Reservation(client, checkinDate, checkoutDate, rooms);
+            DBManagment dbm = new DBManagment();
+            try
+            {
+                dbm.addReservation(toAdd);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }        
+            return true;
         }
 
         public List<Reservation> getDeletedReservations(User client, List<Reservation> reservations)
