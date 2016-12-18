@@ -9,7 +9,7 @@ namespace HotelApp.Reservations
 {
     public interface IReservationUI
     {
-        Reservation createReservation(int id, User client, DateTime checkinDate, DateTime checkoutDate, List<Room> rooms);
+        bool createReservation(User client, DateTime checkinDate, DateTime checkoutDate, List<Room> rooms);
         List<Room> getRooms(double minPrice, double maxPrice, List<Room> rooms);
         List<Room> getRoomsBySmoking(bool smokingAvailable, List<Room> rooms);
         List<Room> getRoomsByPets(bool petsAvailable, List<Room> rooms);
