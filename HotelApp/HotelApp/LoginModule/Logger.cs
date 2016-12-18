@@ -7,9 +7,9 @@ using HotelApp.Database;
 
 namespace HotelApp.LoginModule
 {
-    static class Logger : ILoginUI
+    public class Logger : ILoginUI
     {
-        private DBManagement dataBase = new DBManagement();
+        private ILogging dataBase = new DBManagement();
         bool Exists(string email)
         {
             if (dataBase.findUser(email)) return true;
