@@ -7,19 +7,19 @@
         mc:Ignorable="d"
         Title="RegisterView" Height="325" Width="300" DataContext="{Binding Register, Source={StaticResource Locator}}">
     <Grid>
-        <Button x:Name="registerButton" Content="Rejestruj" HorizontalAlignment="Left" Margin="130,253,0,0" VerticalAlignment="Top" Width="75" Command="{Binding RegisterUser, Mode=OneWay}"/>
-        <Label x:Name="firstNameLabel" Content="Imie" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="registerButton" Content="Rejestruj" HorizontalAlignment="Left" Margin="130,253,0,0" VerticalAlignment="Top" Width="75" Click="registerButton_Click" IsEnabled="{Binding IsRegisterButtonEnabled}"/>
+        <Label x:Name="firstNameLabel" Content="Imię" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lastNameLabel" Content="Nazwisko" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <Label x:Name="phoneNumberLabel" Content="Numer telefonu" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
         <Label x:Name="loginLabel" Content="E-Mail" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top"/>
         <Label x:Name="birthDateLabel" Content="Data urodzenia" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
         <Label x:Name="passwordLabel" Content="Hasło" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="firstNameTextBox" HorizontalAlignment="Left" Height="23" Margin="130,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="lastNameTextBox" HorizontalAlignment="Left" Height="23" Margin="130,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="phoneNumberTextBox" HorizontalAlignment="Left" Height="23" Margin="130,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loginTextBox" HorizontalAlignment="Left" Height="23" Margin="130,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="firstNameTextBox" HorizontalAlignment="Left" Height="23" Margin="130,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding FirstNameText}"/>
+        <TextBox x:Name="lastNameTextBox" HorizontalAlignment="Left" Height="23" Margin="130,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding LastNameText}"/>
+        <TextBox x:Name="phoneNumberTextBox" HorizontalAlignment="Left" Height="23" Margin="130,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding PhoneNumberText}"/>
+        <TextBox x:Name="loginTextBox" HorizontalAlignment="Left" Height="23" Margin="130,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding EmailText}"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="130,192,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
-        <DatePicker x:Name="birthDatePicker" HorizontalAlignment="Left" Margin="130,105,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="birthDatePicker" HorizontalAlignment="Left" Margin="130,105,0,0" VerticalAlignment="Top" Width="120" SelectedDate="{Binding BirthDate}"/>
 
     </Grid>
 </Window>

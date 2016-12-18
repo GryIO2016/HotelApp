@@ -12,6 +12,29 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <ListView ItemsSource="{Binding UIButtons}" BorderBrush="Transparent" FontSize="12" FontWeight="Bold" 
+					ScrollViewer.CanContentScroll="False"
+                          >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <Button Command="{Binding Command}" 
+								BorderThickness="0" Height="32" Width="100" 
+
+                                        >
+                        <TextBlock Text="{Binding ButtonName}" 
+									TextAlignment="Center" 
+                                            
+                                           />
+                    </Button>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Frame Content="{Binding CurrentView}" x:Name="WindowContent" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

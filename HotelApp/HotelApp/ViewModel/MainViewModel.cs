@@ -2,6 +2,8 @@ using GalaSoft.MvvmLight;
 using HotelApp.Database;
 using HotelApp.UI;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace HotelApp.ViewModel
@@ -24,6 +26,7 @@ namespace HotelApp.ViewModel
         private List<UserControl> views;
         private UserControl currentView;
 
+        public ObservableCollection<UIButton> UIButtons { get; set; }
         public UserControl CurrentView
         {
             get
@@ -55,6 +58,7 @@ namespace HotelApp.ViewModel
         public MainViewModel()
         {
             MessengerInstance.Register<UserMessage>(this, ChangeCurrentUser);
+            MessengerInstance.Register<NavigateMessage>(this, ChangeCurrentView);
             views = new List<UserControl>() { new LoginView() };
             CurrentView = views[0];
             ////if (IsInDesignMode)
@@ -73,6 +77,8 @@ namespace HotelApp.ViewModel
             if (CurrentUser == null)
             {
                 views = new List<UserControl>() { new LoginView() };
+                UIButtons = new ObservableCollection<UIButton>();
+                RaisePropertyChanged("UIButtons");
             }
             else
             {
@@ -90,8 +96,25 @@ namespace HotelApp.ViewModel
                         //views = {...}
                         break;
                 }
+                UIButtons = new ObservableCollection<UIButton>();
+                for (int i = 0; i < views.Count; i++)
+                {
+                    UIButtons.Add(new NavigationButton { ButtonName = views[i].Name, ViewNumber = i });
+                }
+                UIButtons.Add(new LogoutButton());
+                RaisePropertyChanged("UIButtons");
             }
             CurrentView = views[0];
+        }
+        private void ChangeCurrentView(NavigateMessage msg)
+        {
+            if (msg.ViewNumber > views.Count - 1)
+            {
+                string message = string.Format("B³¹d w MainViewModel:\n-liczba widoków: {0},\n-podana liczba: {1}", views.Count, msg.ViewNumber);
+                MessageBox.Show(message);
+                return;
+            }
+            CurrentView = views[msg.ViewNumber];
         }
     }
 }

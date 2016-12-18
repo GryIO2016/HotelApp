@@ -4,8 +4,6 @@ using HotelApp.Database;
 using HotelApp.UI;
 using System.Windows;
 using System.Windows.Input;
-using System;
-using LoggingApp;
 
 namespace HotelApp.ViewModel
 {
@@ -14,7 +12,7 @@ namespace HotelApp.ViewModel
         private string loginText;
         private string passwordText;
 
-        //ILoggingUI loginUI;
+        //ILoginUI loginUI;
         public ICommand Login { get; private set; }
         public ICommand Register { get; private set; }
         public string LoginText
@@ -57,15 +55,12 @@ namespace HotelApp.ViewModel
 
         private void LoginCommand()
         {
-            //MessageBox.Show("Brak implementacji ILoggingUI!", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
-            DBManagment testObject = new DBManagment();
-            User testUser = new User();
-            testUser = testObject.findUser("kowalski@a.pl");
-            //MessageBox.Show("Login", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
-            //User tempUser = loginUI.Login(LoginText, PasswordText);
+            MessageBox.Show("Brak implementacji ILoginUI!", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
+            User tempUser = new User { Role = EnumHelper.Role.Admin };
+            //tempUser = loginUI.Login(LoginText, PasswordText);
             //if (tempUser == null)
             //    MessageBox.Show("Niepoprawna nazwa użytkownika/hasło!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //MessengerInstance.Send<UserMessage>(new UserMessage() { NewUser = tempUser });
+            MessengerInstance.Send<UserMessage>(new UserMessage() { NewUser = tempUser });
         }
     }
 }

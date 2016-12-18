@@ -174,9 +174,13 @@
     <Compile Include="UI\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\LogoutButton.cs" />
+    <Compile Include="UI\NavigateMessage.cs" />
+    <Compile Include="UI\NavigationButton.cs" />
     <Compile Include="UI\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UserMessage.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
