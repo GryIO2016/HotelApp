@@ -10,9 +10,11 @@ namespace HotelApp.Timetable
     public class Calendar : ICalendarData
     {
         private List<Reservation> reservations = new List<Reservation>();
+        private DBManagment dataBase = new DBManagment();
 
         public void addReservation(Reservation reservation)
         {
+            dataBase.addReservation(reservation);
             reservations.Add(reservation);
         }
 
@@ -20,6 +22,7 @@ namespace HotelApp.Timetable
         {
             if (reservations.Contains(oldReservation))
             {
+                dataBase.editReservation(oldReservation, newReservation);
                 reservations[reservations.IndexOf(oldReservation)] = newReservation;
             }
             else
@@ -30,8 +33,7 @@ namespace HotelApp.Timetable
 
         public List<Room> getFreeRooms(DateTime startDate, DateTime endTime)
         {
-            List<Room> temp = new List<Room>();
-            return temp;
+            return dataBase.getFreeRooms(startDate, endTime);
         }
 
         public List<Reservation> getReservations(DateTime startDate, DateTime endDate)
