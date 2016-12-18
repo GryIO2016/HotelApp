@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelApp.UI"
         mc:Ignorable="d"
-        Title="RegisterView" Height="325" Width="300">
+        Title="RegisterView" Height="325" Width="300" DataContext="{Binding Register, Source={StaticResource Locator}}">
     <Grid>
-        <Button x:Name="registerButton" Content="Rejestruj" HorizontalAlignment="Left" Margin="130,253,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="registerButton" Content="Rejestruj" HorizontalAlignment="Left" Margin="130,253,0,0" VerticalAlignment="Top" Width="75" Command="{Binding RegisterUser, Mode=OneWay}"/>
         <Label x:Name="firstNameLabel" Content="Imie" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lastNameLabel" Content="Nazwisko" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <Label x:Name="phoneNumberLabel" Content="Numer telefonu" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="loginLabel" Content="Login" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="loginLabel" Content="E-Mail" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top"/>
         <Label x:Name="birthDateLabel" Content="Data urodzenia" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
         <Label x:Name="passwordLabel" Content="Hasło" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="firstNameTextBox" HorizontalAlignment="Left" Height="23" Margin="130,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>

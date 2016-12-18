@@ -44,7 +44,7 @@ namespace HotelApp.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            
+            SimpleIoc.Default.Register<RegisterViewModel>();
         }
 
         public MainViewModel Main
@@ -60,6 +60,14 @@ namespace HotelApp.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<LoginViewModel>();
+            }
+        }
+
+        public RegisterViewModel Register
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RegisterViewModel>();
             }
         }
 

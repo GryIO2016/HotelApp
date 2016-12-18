@@ -51,8 +51,8 @@ namespace HotelApp.ViewModel
 
         private void RegisterCommand()
         {
-            RegisterWindow registerWindow = new RegisterWindow();
-            registerWindow.Show();
+            RegisterView registerWindow = new RegisterView();
+            registerWindow.ShowDialog();
         }
 
         private void LoginCommand()
