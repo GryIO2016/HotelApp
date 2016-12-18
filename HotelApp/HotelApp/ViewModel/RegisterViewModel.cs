@@ -17,6 +17,7 @@ namespace HotelApp.ViewModel
         private string phoneNumberText;
         private DateTime birthDate = DateTime.Now;
         private string emailText;
+        private int role;
         public string FirstNameText
         {
             get
@@ -95,6 +96,15 @@ namespace HotelApp.ViewModel
                 RaisePropertyChanged();
             }
         }
+        public int Role
+        {
+            get { return role; }
+            set
+            {
+                role = value;
+                RaisePropertyChanged();
+            }
+        }
         public ICommand RegisterUser { get; private set; }
 
         public RegisterViewModel()
@@ -117,16 +127,24 @@ namespace HotelApp.ViewModel
                 isEnabled = false;
             if (string.IsNullOrWhiteSpace(LastNameText))
                 isEnabled = false;
-            if (PhoneNumberText.Length != 9)
+            if (PhoneNumberText == null)
                 isEnabled = false;
-            Regex regex = new Regex("[0-9]+");
-            if (!regex.IsMatch(PhoneNumberText))
-                isEnabled = false;
+            else
+            {
+                if (PhoneNumberText.Length != 9)
+                    isEnabled = false;
+
+                Regex regex = new Regex("[0-9]+");
+                if (!regex.IsMatch(PhoneNumberText))
+                    isEnabled = false;
+
+            }
+
             try
             {
                 var mail = new System.Net.Mail.MailAddress(EmailText);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 isEnabled = false;
             }

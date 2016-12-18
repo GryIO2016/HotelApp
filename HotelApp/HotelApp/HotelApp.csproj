@@ -180,11 +180,24 @@
     <Compile Include="UI\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ReservationsView.xaml.cs">
+      <DependentUpon>ReservationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RoomServiceView.xaml.cs">
+      <DependentUpon>RoomServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StatisticsView.xaml.cs">
+      <DependentUpon>StatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TimetablesView.xaml.cs">
+      <DependentUpon>TimetablesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UserMessage.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="LoginModule\LoggingWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +232,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ReservationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\RoomServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\StatisticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\TimetablesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

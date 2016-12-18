@@ -87,7 +87,7 @@ namespace HotelApp.ViewModel
                 switch (CurrentUser.Role)
                 {
                     case EnumHelper.Role.Admin: //Je¿eli admin
-                        //views = {...}
+                        views = new List<UserControl> { new TimetablesView(), new ReservationsView(), new StatisticsView(), new RoomServiceView() };
                         break;
                     case EnumHelper.Role.Client: //Je¿eli klient
                         //views = {...}
@@ -99,7 +99,7 @@ namespace HotelApp.ViewModel
                 UIButtons = new ObservableCollection<UIButton>();
                 for (int i = 0; i < views.Count; i++)
                 {
-                    UIButtons.Add(new NavigationButton { ButtonName = views[i].Name, ViewNumber = i });
+                    UIButtons.Add(new NavigationButton { ButtonName = views[i].Tag.ToString(), ViewNumber = i });
                 }
                 UIButtons.Add(new LogoutButton());
                 RaisePropertyChanged("UIButtons");
