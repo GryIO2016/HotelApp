@@ -11,6 +11,5 @@ namespace HotelApp.LoginModule
     {
         User LogIn(string email, string password);
         bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role);
-        bool Exists(string email);
     }
 }
