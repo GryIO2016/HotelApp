@@ -7,7 +7,7 @@ using HotelApp.Database;
 
 namespace HotelApp.Timetable
 {
-    public class Calendar : ICalendarData
+    public class Calendar : ICalendar, IReservationProcedures
     {
         private List<Reservation> reservations = new List<Reservation>();
         private DBManagment dataBase = new DBManagment();

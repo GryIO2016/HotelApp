@@ -11,7 +11,7 @@ namespace HotelApp.Statistics
     class IStatisticsImplementation : IStatistics 
     {
         //Tutaj powinna być klasa implementująca ICalendar
-        Calendar calendar; //ICalendar calendar;
+        ICalendar calendar; //ICalendar calendar;
 
         public IStatisticsImplementation()
         {
