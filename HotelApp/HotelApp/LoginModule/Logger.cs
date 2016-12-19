@@ -10,21 +10,22 @@ namespace HotelApp.LoginModule
     public class Logger : ILoginUI
     {
         private ILogging dataBase = new DBManagement();
-        bool Exists(string email)
+        private bool Exists(string email)
         {
-            if (dataBase.findUser(email)) return true;
+            User test = dataBase.findUser(email);
+            if (test!=null) return true;
             else return false;
         }
-        User LogIn(string email, string password)
+        public User LogIn(string email, string password)
         {
             User user = dataBase.findUser(email, password);
-            if (user)
+            if (user!=null)
             {
                 return user;
             }
             else return user;
         }
-        bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
+        public bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
         {
             if (Exists(email))
             {
