@@ -29,13 +29,13 @@ namespace HotelApp.LoginModule
         {
             if (Exists(email))
             {
-                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
-                dataBase.addUser(newUser);
-                return true;   //everything went good
+                return false;    //this means that there already IS user with the given e-mail address
             }
             else
             {
-                return false;    //this means that there already IS user with the given e-mail address
+                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
+                dataBase.addUser(newUser);
+                return true;   //everything went good
             }
         }
     }
