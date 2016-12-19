@@ -47,7 +47,7 @@ namespace HotelApp.ViewModel
             tempUser = loginUI.LogIn(LoginText, password);
             if (tempUser == null)
                 MessageBox.Show("Nieprawidłowy email/hasło!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-            MessengerInstance.Send(new UserMessage() { NewUser = tempUser });
+            MessengerInstance.Send<UserMessage>(new UserMessage() { NewUser = tempUser });
         }
     }
 }

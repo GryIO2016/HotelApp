@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HotelApp.Reservations;
 using HotelApp.Database;
+using HotelApp.UI;
+using System.Windows;
 
 namespace HotelApp.ViewModel
 {
     public class ReservationViewModel : ViewModelBase
     {
-        User currentUser;
-        private DateTime checkinDate;
-        private DateTime checkoutDate;
+        private DateTime checkinDate = DateTime.Now;
+        private DateTime checkoutDate = DateTime.Now;
         private bool smokingAvailable;
         private bool petsAvailable;
         private int bedType;
@@ -115,13 +116,21 @@ namespace HotelApp.ViewModel
         }
         private void RoomListCommand()
         {
-            rooms = ReservationService.getRooms((EnumHelper.Status)4, rooms);
+            DBManagment db = new DBManagment();
+            {
+                rooms = db.getFreeRooms(checkinDate, checkoutDate);
+            }
+            rooms = ReservationService.getRooms(EnumHelper.Status.Free, rooms);
             rooms = ReservationService.getRooms(minPrice, maxPrice, rooms);
-            rooms = ReservationService.getRooms((EnumHelper.BedType)bedType, rooms);
+            rooms = ReservationService.getRooms((EnumHelper.BedType)bedType+1, rooms);
             rooms = ReservationService.getRoomsBySmoking(smokingAvailable, rooms);
             rooms = ReservationService.getRoomsByPets(petsAvailable, rooms);
-            ReservationService.createReservation(currentUser, checkinDate, checkoutDate, rooms);
-            
+            bool success = ReservationService.createReservation(ActiveUser.Instance.CurrentUser, checkinDate, checkoutDate, rooms);
+            if (success)
+                MessageBox.Show("Dodano rezerwacje ", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                MessageBox.Show("Nie udało się dodać rejestracji! ", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
     }
 }

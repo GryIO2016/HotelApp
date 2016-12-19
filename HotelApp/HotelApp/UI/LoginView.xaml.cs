@@ -15,7 +15,13 @@ namespace HotelApp.UI
 
         private void loginButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            (DataContext as LoginViewModel).Login.Execute(passwordBox.Password);
+            (DataContext as LoginViewModel)?.Login.Execute(passwordBox.Password);
+        }
+
+        private void Grid_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key==System.Windows.Input.Key.Enter)
+                (DataContext as LoginViewModel)?.Login.Execute(passwordBox.Password);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace HotelApp.UI
         private void registerButton_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as RegisterViewModel)?.RegisterUser.Execute(passwordBox.Password);
+            Close();
         }
     }
 }

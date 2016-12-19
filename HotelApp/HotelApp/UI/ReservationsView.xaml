@@ -11,8 +11,8 @@
     <Grid>
         <DatePicker HorizontalAlignment="Left" Margin="135,21,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckinDate}"/>
         <DatePicker HorizontalAlignment="Left" Margin="135,63,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckoutDate}"/>
-        <RadioButton x:Name="smoking"  HorizontalAlignment="Left" Margin="135,180,0,0" VerticalAlignment="Top" Width="17" RenderTransformOrigin="1.378,0.582" IsChecked="{Binding SmokingAvailable}"/>
-        <RadioButton x:Name="pets" HorizontalAlignment="Left" Margin="135,213,0,0" VerticalAlignment="Top" IsChecked="{Binding PetsAvailable}"/>
+        <CheckBox x:Name="smoking"  HorizontalAlignment="Left" Margin="135,180,0,0" VerticalAlignment="Top" Width="17" RenderTransformOrigin="1.378,0.582" IsChecked="{Binding SmokingAvailable}"/>
+        <CheckBox x:Name="pets" HorizontalAlignment="Left" Margin="135,213,0,0" VerticalAlignment="Top" IsChecked="{Binding PetsAvailable}"/>
         <ComboBox x:Name="łóżkaComboBox" HorizontalAlignment="Left" Height="25" Margin="135,241,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.974,0.371" SelectedIndex="{Binding BedType}"  >
             <System:String>Pojedyńcze</System:String>
             <System:String>Bliźniacze</System:String>

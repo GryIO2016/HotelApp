@@ -49,6 +49,7 @@ namespace HotelApp.ViewModel
             set
             {
                 currentUser = value;
+                ActiveUser.Instance.CurrentUser = value;
                 RaisePropertyChanged();
             }
         }
