@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:HotelApp.UI"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="RegisterView" Height="376.475" Width="341.382" DataContext="{Binding Register, Source={StaticResource Locator}}">
-    <Grid Margin="0,0,-32,-21">
-        <Button x:Name="registerButton" Content="Rejestruj" HorizontalAlignment="Left" Margin="130,298,0,0" VerticalAlignment="Top" Width="75" Click="registerButton_Click" IsEnabled="{Binding IsRegisterButtonEnabled}"/>
+        Title="RegisterView" Height="350" Width="400" DataContext="{Binding Register, Source={StaticResource Locator}}">
+    <Grid>
+        <Button x:Name="registerButton" Content="Rejestruj" HorizontalAlignment="Left" Margin="130,289,0,0" VerticalAlignment="Top" Width="75" Click="registerButton_Click" IsEnabled="{Binding IsRegisterButtonEnabled}"/>
         <Label x:Name="firstNameLabel" Content="Imię" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lastNameLabel" Content="Nazwisko" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <Label x:Name="phoneNumberLabel" Content="Numer telefonu" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>

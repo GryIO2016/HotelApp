@@ -6,7 +6,7 @@
        xmlns:vm="clr-namespace:HotelApp.ViewModel"
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" Title="HotelApp" Height="350" Width="600
+        DataContext="{Binding Main, Source={StaticResource Locator}}" Title="HotelApp" Height="400" Width="600
         ">
     <Grid>
         <Grid.RowDefinitions>
