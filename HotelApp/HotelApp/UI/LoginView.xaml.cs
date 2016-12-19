@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using HotelApp.ViewModel;
+using System.Windows.Controls;
 
 namespace HotelApp.UI
 {
@@ -10,6 +11,11 @@ namespace HotelApp.UI
         public LoginView()
         {
             InitializeComponent();
+        }
+
+        private void loginButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            (DataContext as LoginViewModel).Login.Execute(passwordBox.Password);
         }
     }
 }

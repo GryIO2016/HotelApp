@@ -4,19 +4,21 @@ using System.Windows;
 using System.Windows.Input;
 using System;
 using System.Text.RegularExpressions;
+using HotelApp.LoginModule;
+using HotelApp.Database;
 
 namespace HotelApp.ViewModel
 {
     public class RegisterViewModel : ViewModelBase
     {
-        //private ILoginUI loginUI;
-        private string passwordText;
+        private ILoginUI loginUI;
         private bool isButtonEnabled = false;
         private string firstNameText;
         private string lastNameText;
         private string phoneNumberText;
         private DateTime birthDate = DateTime.Now;
         private string emailText;
+        private string peselText;
         private int role;
         public string FirstNameText
         {
@@ -86,10 +88,7 @@ namespace HotelApp.ViewModel
         }
         public bool IsRegisterButtonEnabled
         {
-            get
-            {
-                return isButtonEnabled;
-            }
+            get { return isButtonEnabled; }
             set
             {
                 isButtonEnabled = value;
@@ -105,20 +104,36 @@ namespace HotelApp.ViewModel
                 RaisePropertyChanged();
             }
         }
+        public string PESELText
+        {
+            get { return peselText; }
+            set
+            {
+                peselText = value;
+                RaisePropertyChanged();
+            }
+        }
         public ICommand RegisterUser { get; private set; }
 
         public RegisterViewModel()
         {
-            //loginUI = new LoginUI();
+            loginUI = new Logger();
             RegisterUser = new RelayCommand<string>(RegisterCommand);
         }
 
         private void RegisterCommand(string password)
         {
-            passwordText = password;
-            MessageBox.Show("Brak implementacji ILoginUI! ", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
+            //MessageBox.Show("Brak implementacji ILoginUI! ", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
             //TODO: Sprawdzić hasło.
-            //loginUI.Register(...);
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Puste pole hasła!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (!loginUI.RegisterUser(FirstNameText, LastNameText, BirthDate, PhoneNumberText, EmailText, password, PESELText, (EnumHelper.Role)Role+2))
+            {
+                MessageBox.Show("Konto już istnieje!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private void CheckRegisterButton()
         {
@@ -133,11 +148,28 @@ namespace HotelApp.ViewModel
             {
                 if (PhoneNumberText.Length != 9)
                     isEnabled = false;
-
                 Regex regex = new Regex("[0-9]+");
                 if (!regex.IsMatch(PhoneNumberText))
                     isEnabled = false;
-
+            }
+            if (PESELText == null)
+                isEnabled = false;
+            else
+            {
+                Regex regex = new Regex("[0-9]{11}");
+                if (!regex.IsMatch(PESELText))
+                    isEnabled = false;
+                else
+                {
+                    int[] mnozniki = new int[] { 9, 7, 3, 1, 9, 7, 3, 1, 9, 7 };
+                    int sum = 0;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        sum += (PESELText[i] - '0') * mnozniki[i];
+                    }
+                    if (sum % 10 != PESELText[10] - '0')
+                        isEnabled = false;
+                }
             }
 
             try
