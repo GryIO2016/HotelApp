@@ -276,6 +276,7 @@ namespace HotelApp.Database
                     .Where(b => b.email == email && b.password == password)
                     .FirstOrDefault();
 
+                    user.Id = u.user_id;
                     user.Name = u.first_name;
                     user.LastName = u.last_name;
                     user.BirthDate = (DateTime)u.birth_date;
