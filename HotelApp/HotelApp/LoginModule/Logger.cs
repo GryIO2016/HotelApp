@@ -9,7 +9,7 @@ namespace HotelApp.LoginModule
 {
     public class Logger : ILoginUI
     {
-        private ILogging dataBase = new DBManagement();
+        private ILogging dataBase = new DBManagment();
         private bool Exists(string email)
         {
             User test = dataBase.findUser(email);
@@ -29,12 +29,13 @@ namespace HotelApp.LoginModule
         {
             if (Exists(email))
             {
-                return true;    //this means that there already IS user with the given e-mail address
+                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
+                dataBase.addUser(newUser);
+                return true;   //everything went good
             }
             else
             {
-                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
-                dataBase.addUser(newUser);
+                return false;    //this means that there already IS user with the given e-mail address
             }
         }
     }

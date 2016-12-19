@@ -10,7 +10,7 @@ namespace HotelApp.LoginModule
     public interface ILoginUI
     {
         User LogIn(string email, string password);
-        int RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role);
+        bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role);
         bool Exists(string email);
     }
 }
