@@ -106,14 +106,15 @@ namespace HotelApp.Database
             return TotalPrice;
         }
 
-        public void toString()
+        public override string ToString()
         {
-            Console.WriteLine("Reservation " + Id + ", " + CheckInDate + ", " + CheckOutDate + ", confirmed: " + Confirmed + ", paid: " + Paid + ", total price: " +TotalPrice + ", canceled: " + Canceled);
-            User.toString();
+            string text = ("Reservation " + Id + ", " + CheckInDate + ", " + CheckOutDate + ", confirmed: " + Confirmed + ", paid: " + Paid + ", total price: " + TotalPrice + ", canceled: " + Canceled);
+            text += "\n" + User.ToString();
             foreach (Room r in Rooms)
             {
-                r.toString();
+                text += "\n" + r.ToString();
             }
+            return text;
         }
     }
 }

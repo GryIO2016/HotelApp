@@ -46,9 +46,9 @@ namespace HotelApp.Database
             Role = role;
         }
 
-        public void toString()
+        public override string ToString()
         {
-            Console.WriteLine("User " + Id + ": " + Name + " " + LastName + ", " + BirthDate + ", " + Phone + ", "
+            return ("User " + Id + ": " + Name + " " + LastName + ", " + BirthDate + ", " + Phone + ", "
                 + Email + ", " + Password + ", " + Pesel + ", " + Role);
         }
 

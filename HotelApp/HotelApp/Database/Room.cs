@@ -32,9 +32,9 @@ namespace HotelApp.Database
         {
         }
 
-        public void toString()
+        public override string ToString()
         {
-            Console.WriteLine("Room " + Id + ", " + Number + ", " + Price + ", smoking: " + Smoking + ", pets: " + Pets + ", " + BedType + ", " + RoomStatus);
+            return ("Room " + Id + ", " + Number + ", " + Price + ", smoking: " + Smoking + ", pets: " + Pets + ", " + BedType + ", " + RoomStatus);
         }
     }
 }
