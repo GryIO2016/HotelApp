@@ -294,7 +294,40 @@ namespace HotelApp.Database
             return user;
         }
 
+        public List<User> AllUsers()
+        {
+            List<User> userList = new List<User>();
 
+            try
+            {
+                using (var Conn = new IO2017Entities())
+                {
+                    var list = Conn.users;
+
+                    foreach (users u in list)
+                    {
+                        User user = new User();
+                        user.Id = u.user_id;
+                        user.Name = u.first_name;
+                        user.LastName = u.last_name;
+                        user.BirthDate = (DateTime)u.birth_date;
+                        user.Phone = u.phone_number;
+                        user.Email = u.email;
+                        user.Password = u.password;
+                        user.Pesel = u.pesel;
+                        user.Role = (EnumHelper.Role)u.role;
+
+                        userList.Add(user);
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return userList;
+        }
         // 
 
         public Room getRoom(int id)
