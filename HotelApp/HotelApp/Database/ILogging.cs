@@ -12,5 +12,6 @@ namespace HotelApp.Database
         void editUser(User oldUser, User newUser);
         User findUser(String email);
         User findUser(String email, String password);
+        List<User> AllUsers();
     }
 }
