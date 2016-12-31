@@ -29,14 +29,33 @@ namespace HotelApp.LoginModule
         {
             if (Exists(email))
             {
-                return false;    //this means that there already IS user with the given e-mail address
+                return false;
             }
             else
             {
                 User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
                 dataBase.addUser(newUser);
-                return true;   //everything went good
+                return true;
             }
+        }
+        public bool EditUser(User oldUser, User newUser)
+        {
+            User user = dataBase.findUser(oldUser.Email);
+            if (user != null)
+            {
+                return false;
+            }
+            else
+            {
+                dataBase.editUser(oldUser, newUser);
+                return true;
+            }
+        }
+        public List<User> ListUsers()
+        {
+            List<User> lista = new List<User>();
+            lista = dataBase.AllUsers();
+            return lista;
         }
     }
 }
