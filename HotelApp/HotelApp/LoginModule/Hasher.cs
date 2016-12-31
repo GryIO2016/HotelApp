@@ -11,10 +11,11 @@ namespace HotelApp.LoginModule
     {
         private SHA1 haszer = new SHA1CryptoServiceProvider();
 
-        public int Encode (string text)
+        public string Encode (string text)
         {
             int odpowiedz = text.GetHashCode();
-            return odpowiedz;
+            string answer = odpowiedz.ToString();
+            return answer;
         }
     }
 }

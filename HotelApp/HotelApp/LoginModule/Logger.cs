@@ -10,6 +10,7 @@ namespace HotelApp.LoginModule
     public class Logger : ILoginUI
     {
         private ILogging dataBase = new DBManagment();
+        private Hasher haszer = new Hasher();
         private bool Exists(string email)
         {
             User test = dataBase.findUser(email);
@@ -18,7 +19,8 @@ namespace HotelApp.LoginModule
         }
         public User LogIn(string email, string password)
         {
-            User user = dataBase.findUser(email, password);
+            string haslo = haszer.Encode(password);
+            User user = dataBase.findUser(email, haslo);
             if (user!=null)
             {
                 return user;
@@ -33,7 +35,8 @@ namespace HotelApp.LoginModule
             }
             else
             {
-                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
+                string haslo = haszer.Encode(password);
+                User newUser = new User(name, lastName, birthDate, phone, email, haslo, pesel, role);
                 dataBase.addUser(newUser);
                 return true;
             }
