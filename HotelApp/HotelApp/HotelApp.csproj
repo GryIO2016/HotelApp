@@ -140,6 +140,7 @@
     <Compile Include="Database\users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoginModule\Hasher.cs" />
     <Compile Include="LoginModule\Logger.cs" />
     <Compile Include="LoginModule\ILoginUI.cs" />
     <Compile Include="Reservations\IReservationData.cs" />
