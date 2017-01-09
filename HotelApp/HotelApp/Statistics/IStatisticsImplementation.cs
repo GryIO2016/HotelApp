@@ -33,32 +33,32 @@ namespace HotelApp.Statistics
             }
         }
 
-        //Dalsze metody nie są jeszcze zaimplementowane
         public void getFreeRooms(Statistics stat)
         {
             DateTime data = stat.StartDate;
             while (data < stat.EndDate)
             {
                 double wolne = 0.0;
-                /*foreach (Reservation r in calendar.getReservations(stat.StartDate, stat.EndDate))
-                {
-                    if (r.CheckInDate.Date == data) przychod += r.Paid;
-                }*/
+                
+                wolne += calendar.getFreeRooms(data, data).Count;
                 stat.StatData.Add(wolne);
                 data = data.AddDays(1.0);
             }
         }
 
+        //Dalsze metody nie są jeszcze zaimplementowane
         public void getRoomVacancy(Statistics stat)
         {
             DateTime data = stat.StartDate;
             while (data < stat.EndDate)
             {
+                
                 double zajetosc = 0.0;
-                /*foreach (Reservation r in calendar.getReservations(stat.StartDate, stat.EndDate))
+                /*foreach (Reservation r in calendar.getReservations(data, data))
                 {
                     if (r.CheckInDate.Date == data) przychod += r.Paid;
                 }*/
+                zajetosc += calendar.getReservations(data, data).Count;
                 stat.StatData.Add(zajetosc);
                 data = data.AddDays(1.0);
             }
