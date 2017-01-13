@@ -10,6 +10,7 @@ using HotelApp.Reservations;
 using HotelApp.Database;
 using HotelApp.UI;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace HotelApp.ViewModel
 {
@@ -23,7 +24,33 @@ namespace HotelApp.ViewModel
         private double minPrice = 10.00;
         private double maxPrice = 1000.00;
         List<Room> rooms = new List<Room> { };
+        Room selectedRoom;
+        ObservableCollection<Room> listOfRooms = new ObservableCollection<Room>();  
         IReservationUI ReservationService;
+        public ObservableCollection<Room> ListOfRooms
+        {
+            get
+            {
+                return listOfRooms;
+            }
+            set
+            {
+                listOfRooms = value;
+                RaisePropertyChanged();
+            }
+        }
+        public Room SelectedRooms
+        {
+            get
+            {
+                return selectedRoom;
+            }
+            set
+            {
+                selectedRoom = value;
+                RaisePropertyChanged();
+            }
+        }
         public int BedType
         {
             get
@@ -109,27 +136,47 @@ namespace HotelApp.ViewModel
             }
         }
         public ICommand RoomList { get; private set; }
+        public ICommand ReserveRooms { get; private set; }
         public ReservationViewModel()
         {
             ReservationService = new ReservationUIService();
             RoomList = new RelayCommand(RoomListCommand);
+            ReserveRooms = new RelayCommand(ReserveRoomsCommand);
+        }
+        private void ReserveRoomsCommand()
+        {
+            //MessageBox.Show(string.Format("Pokój: {0}", selectedRoom.Number), "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+            List<Room> temp = new List<Room>();
+            temp.Add(selectedRoom);
+            bool success = ReservationService.createReservation(ActiveUser.Instance.CurrentUser, checkinDate, checkoutDate, temp);
+              if (success)
+                  MessageBox.Show("Dodano rezerwacje ", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+              else
+                  MessageBox.Show("Nie udało się dodać rejestracji! ", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
+             
         }
         private void RoomListCommand()
         {
+            listOfRooms.Clear();
             DBManagment db = new DBManagment();
             {
                 rooms = db.getFreeRooms(checkinDate, checkoutDate);
             }
+            
             rooms = ReservationService.getRooms(EnumHelper.Status.Free, rooms);
             rooms = ReservationService.getRooms(minPrice, maxPrice, rooms);
-            rooms = ReservationService.getRooms((EnumHelper.BedType)bedType+1, rooms);
+            if(bedType!=0)
+                rooms = ReservationService.getRooms((EnumHelper.BedType)bedType, rooms);
             rooms = ReservationService.getRoomsBySmoking(smokingAvailable, rooms);
             rooms = ReservationService.getRoomsByPets(petsAvailable, rooms);
-            bool success = ReservationService.createReservation(ActiveUser.Instance.CurrentUser, checkinDate, checkoutDate, rooms);
-            if (success)
-                MessageBox.Show("Dodano rezerwacje ", "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
-            else
-                MessageBox.Show("Nie udało się dodać rejestracji! ", "Błąd krytyczny", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            foreach (Room r in rooms)
+            {
+                listOfRooms.Add(r);
+                //MessageBox.Show(String.Format("Pokój {0}, ilość pokoi na liście: {1}", r.Number, rooms.Count), "Sukces", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+
 
         }
     }

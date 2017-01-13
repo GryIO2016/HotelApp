@@ -6,19 +6,20 @@
              xmlns:local="clr-namespace:HotelApp.UI"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding Statistics, Source={StaticResource Locator}}" Tag="Statystyki">
+             d:DesignHeight="300" d:DesignWidth="600
+             " DataContext="{Binding Statistics, Source={StaticResource Locator}}" Tag="Statystyki">
     <Grid>
-        <Button x:Name="buttonPlot" Content="Rysuj wykres" HorizontalAlignment="Left" Margin="95,227,0,0" VerticalAlignment="Top" Width="100" Height="33" Command="{Binding StatisticsShow, Mode=OneWay}" />
-        <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Height="25" Margin="51,52,0,0" VerticalAlignment="Top" Width="188" SelectedIndex="{Binding CategoryId}" >
+        <Button x:Name="buttonPlot" Content="Rysuj wykres" HorizontalAlignment="Left" Margin="257,227,0,0" VerticalAlignment="Top" Width="100" Height="33" Command="{Binding StatisticsShow, Mode=OneWay}" />
+        <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Height="25" Margin="213,52,0,0" VerticalAlignment="Top" Width="188" SelectedIndex="{Binding CategoryId}" >
             <System:String>Dzienny przychód</System:String>
             <System:String>Wolne pokoje</System:String>
             <System:String>Zajętość pokoju</System:String>
         </ComboBox>
-        <DatePicker x:Name="startDateBox" HorizontalAlignment="Left" Height="27" Margin="51,113,0,0" VerticalAlignment="Top" Width="188" SelectedDate="{Binding StartDate}"/>
-        <DatePicker x:Name="endDateBox" HorizontalAlignment="Left" Height="27" Margin="51,176,0,0" VerticalAlignment="Top" Width="188" SelectedDate="{Binding EndDate}"/>
-        <Label x:Name="label" Content="Kryterium statystyk" HorizontalAlignment="Left" Height="31" Margin="51,21,0,0" VerticalAlignment="Top" Width="188"/>
-        <Label x:Name="label_Copy" Content="Data początkowa przedziału" HorizontalAlignment="Left" Height="31" Margin="51,82,0,0" VerticalAlignment="Top" Width="188"/>
-        <Label x:Name="label_Copy1" Content="Data końcowa przedziału" HorizontalAlignment="Left" Height="31" Margin="51,145,0,0" VerticalAlignment="Top" Width="188"/>
+        <DatePicker x:Name="startDateBox" HorizontalAlignment="Left" Height="27" Margin="213,113,0,0" VerticalAlignment="Top" Width="188" SelectedDate="{Binding StartDate}"/>
+        <DatePicker x:Name="endDateBox" HorizontalAlignment="Left" Height="27" Margin="213,176,0,0" VerticalAlignment="Top" Width="188" SelectedDate="{Binding EndDate}"/>
+        <Label x:Name="label" Content="Kryterium statystyk" HorizontalAlignment="Left" Height="31" Margin="213,21,0,0" VerticalAlignment="Top" Width="188"/>
+        <Label x:Name="label_Copy" Content="Data początkowa przedziału" HorizontalAlignment="Left" Height="31" Margin="213,82,0,0" VerticalAlignment="Top" Width="188"/>
+        <Label x:Name="label_Copy1" Content="Data końcowa przedziału" HorizontalAlignment="Left" Height="31" Margin="213,145,0,0" VerticalAlignment="Top" Width="188"/>
 
     </Grid>
 </UserControl>

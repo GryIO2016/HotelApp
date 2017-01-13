@@ -7,26 +7,37 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              DataContext="{Binding Reserve, Source={StaticResource Locator}}" 
-             d:DesignHeight="350" d:DesignWidth="300" Tag="Rezerwacje">
+             d:DesignHeight="350" d:DesignWidth="500" Tag="Rezerwacje">
     <Grid>
-        <DatePicker HorizontalAlignment="Left" Margin="135,21,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckinDate}"/>
-        <DatePicker HorizontalAlignment="Left" Margin="135,63,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckoutDate}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="135,21,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckinDate}" Width="120"/>
+        <DatePicker HorizontalAlignment="Left" Margin="135,63,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckoutDate}" Width="120"/>
         <CheckBox x:Name="smoking"  HorizontalAlignment="Left" Margin="135,180,0,0" VerticalAlignment="Top" Width="17" RenderTransformOrigin="1.378,0.582" IsChecked="{Binding SmokingAvailable}"/>
         <CheckBox x:Name="pets" HorizontalAlignment="Left" Margin="135,213,0,0" VerticalAlignment="Top" IsChecked="{Binding PetsAvailable}"/>
         <ComboBox x:Name="łóżkaComboBox" HorizontalAlignment="Left" Height="25" Margin="135,241,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.974,0.371" SelectedIndex="{Binding BedType}"  >
+            <System:String>Dowolne</System:String>
             <System:String>Pojedyńcze</System:String>
             <System:String>Bliźniacze</System:String>
             <System:String>Podwójne</System:String>
         </ComboBox>
         <Label x:Name="label" Content="Data początkowa:" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Data końcowa:" HorizontalAlignment="Left" Margin="26,61,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="Dla Palących:" HorizontalAlignment="Left" Margin="36,171,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Zwierzeta:" HorizontalAlignment="Left" Margin="51,202,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label4" Content="Typ łóżka:" HorizontalAlignment="Left" Margin="52,240,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Data końcowa:" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Dla Palących:" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="Zwierzeta:" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label4" Content="Typ łóżka:" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="minPrice" HorizontalAlignment="Left" Height="23" Margin="135,99,0,0" TextWrapping="Wrap" Text="{Binding MinPrice, StringFormat=\{0:C\}}" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="maxPrice" HorizontalAlignment="Left" Height="23" Margin="135,137,0,0" TextWrapping="Wrap" Text="{Binding MaxPrice, StringFormat=\{0:C\}}" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label5" Content="Cena max:" HorizontalAlignment="Left" Margin="50,134,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label6" Content="Cena min:" HorizontalAlignment="Left" Margin="50,96,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Wyświetl liste rezerwacji" HorizontalAlignment="Left" Margin="77,289,0,0" VerticalAlignment="Top" Width="75" Command="{Binding RoomList, Mode=OneWay}" RenderTransformOrigin="0.596,1.664"/>
+        <Label x:Name="label5" Content="Cena max:" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label6" Content="Cena min:" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Wyświetl liste rezerwacji" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="245" Command="{Binding RoomList, Mode=OneWay}" RenderTransformOrigin="0.596,1.664"/>
+        <ListView x:Name="ListRooms" HorizontalAlignment="Left" Height="244" Margin="260,22,0,0" VerticalAlignment="Top" Width="230" ItemsSource="{Binding ListOfRooms}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedRooms}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nr" Width="40" DisplayMemberBinding="{Binding Number}"/>
+                    <GridViewColumn Header="BedType" Width="115" DisplayMemberBinding="{Binding BedType}"/>
+                    <GridViewColumn Header="Price" Width="70" DisplayMemberBinding="{Binding Price}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="ReserveButton" Content="Zarezerwój Wybrany Pokój" HorizontalAlignment="Left" Margin="260,289,0,0" VerticalAlignment="Top" Width="230" Command="{Binding ReserveRooms, Mode=OneWay}" />
     </Grid>
 </UserControl>
