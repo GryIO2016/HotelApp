@@ -16,15 +16,14 @@ using System.Windows.Shapes;
 namespace HotelApp.UI
 {
     /// <summary>
-    /// Interaction logic for RoomServiceView.xaml
+    /// Interaction logic for WorkerRSView.xaml
     /// </summary>
-    public partial class RoomServiceView : UserControl
+    public partial class WorkerRSView : UserControl
     {
-        public RoomServiceView()
+        public WorkerRSView()
         {
             InitializeComponent();
         }
-
 
     }
 }

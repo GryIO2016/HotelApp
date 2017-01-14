@@ -28,7 +28,7 @@
         <TextBox x:Name="maxPrice" HorizontalAlignment="Left" Height="23" Margin="135,137,0,0" TextWrapping="Wrap" Text="{Binding MaxPrice, StringFormat=\{0:C\}}" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label5" Content="Cena max:" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label6" Content="Cena min:" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Wyświetl liste rezerwacji" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="245" Command="{Binding RoomList, Mode=OneWay}" RenderTransformOrigin="0.596,1.664"/>
+        <Button x:Name="button" Content="Wyświetl liste pokoi" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="245" Command="{Binding RoomList, Mode=OneWay}" RenderTransformOrigin="0.596,1.664"/>
         <ListView x:Name="ListRooms" HorizontalAlignment="Left" Height="244" Margin="260,22,0,0" VerticalAlignment="Top" Width="230" ItemsSource="{Binding ListOfRooms}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedRooms}">
             <ListView.View>
                 <GridView>

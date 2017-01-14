@@ -3,10 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HotelApp.UI"
+             xmlns:local="clr-namespace:HotelApp.UI"         
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Tag="Obsługa Pokoi">
+             d:DesignHeight="300" d:DesignWidth="600" Tag="Edycja Pokoi" DataContext="{Binding RoomService, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
-        <Label x:Name="label" Content="Room Service will be here soon" HorizontalAlignment="Left" Height="31" Margin="60,72,0,0" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.66,0.645"/>
+        <Label x:Name="label" Content="Numer Pokoju" HorizontalAlignment="Left" Height="31" Margin="361,39,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.66,0.645"/>
+        <Label x:Name="label_Copy" Content="Cena" HorizontalAlignment="Left" Height="31" Margin="361,70,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.66,0.645"/>
+        <Label x:Name="label_Copy1" Content="Dla palących" HorizontalAlignment="Left" Height="31" Margin="361,101,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.66,0.645"/>
+        <Label x:Name="label_Copy2" Content="Zwierzęta" HorizontalAlignment="Left" Height="31" Margin="361,132,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.66,0.645"/>
+        <Label x:Name="label_Copy3" Content="Typ łóżka" HorizontalAlignment="Left" Height="31" Margin="361,163,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.66,0.645"/>
+        <Label x:Name="label_Copy4" Content="Status Pokoju:" HorizontalAlignment="Left" Height="31" Margin="361,194,0,0" VerticalAlignment="Top" Width="87" RenderTransformOrigin="0.66,0.645"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Number}" VerticalAlignment="Top" Width="120" Margin="453,43,0,0"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Price}" VerticalAlignment="Top" Width="120" Margin="453,74,0,0"/>
+        <CheckBox x:Name="checkBox" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="453,107,0,0" IsChecked="{Binding Smoking}"/>
+        <CheckBox x:Name="checkBox_Copy" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="453,140,0,0" RenderTransformOrigin="0.544,0.628" IsChecked="{Binding Pets}"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="448,163,0,0" SelectedIndex="{Binding BedType}">
+            <System:String>Pojedyńcze</System:String>
+            <System:String>Bliźniacze</System:String>
+            <System:String>Podwójne</System:String>
+        </ComboBox>
+        <ComboBox x:Name="comboBox_Copy" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="448,194,0,0" SelectedIndex="{Binding Status}">
+            <System:String>Booking</System:String>
+            <System:String>Rent</System:String>
+            <System:String>ToClean</System:String>
+            <System:String>Free</System:String>
+        </ComboBox>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="255" VerticalAlignment="Top" Width="341" Margin="10,10,0,0" ItemsSource="{Binding RoomList}" SelectedItem="{Binding SelectedRoom}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nr" Width="30" DisplayMemberBinding="{Binding Number}"/>
+                    <GridViewColumn Header="Cena" Width="50" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Palący" Width="50" DisplayMemberBinding="{Binding Smoking}"/>
+                    <GridViewColumn Header="Zwierzęta" Width="60" DisplayMemberBinding="{Binding Pets}"/>
+                    <GridViewColumn Header="Typ Łóżka" Width="70" DisplayMemberBinding="{Binding BedType}"/>
+                    <GridViewColumn Header="Status" Width="80" DisplayMemberBinding="{Binding RoomStatus}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="Refersh" Content="Odświerz" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="168" Command="{Binding Refresh, Mode=OneWay}"/>
+        <Button x:Name="Edit" Content="Edytuj wybrany pokój" HorizontalAlignment="Left" Margin="183,270,0,0" VerticalAlignment="Top" Width="181" Command="{Binding SelectRoom, Mode=OneWay}" />
+        <Button x:Name="Accept" Content="Zatwierdź zmiany" HorizontalAlignment="Left" Margin="369,270,0,0" VerticalAlignment="Top" Width="221" Command="{Binding EditRoom, Mode=OneWay}" />
     </Grid>
 </UserControl>

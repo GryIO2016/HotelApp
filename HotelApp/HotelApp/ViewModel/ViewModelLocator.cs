@@ -47,6 +47,10 @@ namespace HotelApp.ViewModel
             SimpleIoc.Default.Register<StatisticsViewModel>();
             SimpleIoc.Default.Register<ReservationViewModel>();
             SimpleIoc.Default.Register<EditUsersViewModel>();
+            SimpleIoc.Default.Register<WorkerRSViewModel>();
+            SimpleIoc.Default.Register<RoomServiceViewModel>();
+
+
         }
 
         public MainViewModel Main
@@ -90,6 +94,20 @@ namespace HotelApp.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<EditUsersViewModel>();
+            }
+        }
+        public WorkerRSViewModel WorkerRS
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<WorkerRSViewModel>();
+            }
+        }
+        public RoomServiceViewModel RoomService
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RoomServiceViewModel>();
             }
         }
         public static void Cleanup()
