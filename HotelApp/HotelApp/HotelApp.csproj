@@ -172,6 +172,9 @@
     <Compile Include="Timetable\IReservationProcedures.cs" />
     <Compile Include="Timetable\ReservationNotFoundException.cs" />
     <Compile Include="UI\ActiveUser.cs" />
+    <Compile Include="UI\EditUsersView.xaml.cs">
+      <DependentUpon>EditUsersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -195,6 +198,7 @@
     </Compile>
     <Compile Include="UI\UIButton.cs" />
     <Compile Include="UI\UserMessage.cs" />
+    <Compile Include="ViewModel\EditUsersViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -220,6 +224,10 @@
     <Page Include="Statistics\StatisticsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\EditUsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\LoginView.xaml">
       <SubType>Designer</SubType>

@@ -88,13 +88,13 @@ namespace HotelApp.ViewModel
                 switch (CurrentUser.Role)
                 {
                     case EnumHelper.Role.Admin: //Je¿eli admin
-                        views = new List<UserControl> { new TimetablesView(), new ReservationsView(), new StatisticsView(), new RoomServiceView() };
+                        views = new List<UserControl> { new TimetablesView(), new ReservationsView(), new StatisticsView(), new RoomServiceView(), new EditUsersView() };
                         break;
                     case EnumHelper.Role.Client: //Je¿eli klient
-                        //views = {...}
+                        views = new List<UserControl> { new TimetablesView(), new ReservationsView() };
                         break;
                     case EnumHelper.Role.Employee: //Je¿eli pracownik
-                        //views = {...}
+                        views = new List<UserControl> { new TimetablesView(), new RoomServiceView() };
                         break;
                 }
                 UIButtons = new ObservableCollection<UIButton>();

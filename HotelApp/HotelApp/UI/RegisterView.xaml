@@ -29,5 +29,6 @@
         <Label x:Name="pickerLabel" Content="Typ konta" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top"/>
         <Label x:Name="peselLabel" Content="PESEL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="peselTextBox" HorizontalAlignment="Left" Height="23" Margin="130,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding PESELText}"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
