@@ -12,10 +12,12 @@ namespace HotelApp.RoomService
     {
         public bool acceptReservation(Reservation res)
         {
+            Reservation newRes = res;
+            newRes.Confirmed = true;
             ICalendar c = new Calendar();
             try
             {
-                c.addReservation(res);
+                c.editReservation(res, newRes);
                 return true;
             } catch (Exception e)
             {
