@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HotelApp.Database;
 using HotelApp.Reservations;
-
+using HotelApp.Timetable;
 namespace HotelApp.Reservations
 {
     public class ReservationUIService : IReservationUI
@@ -13,13 +13,17 @@ namespace HotelApp.Reservations
         public bool cancelReservation(int id, List<Reservation> reservations)
         {
             Reservation found = getReservation(id, reservations);
+            Reservation oldRes = found;
 
             if (found == null)
             {
                 return false;
             }
-
             found.Canceled = true;
+
+            ICalendar c = new Calendar();
+            c.editReservation(oldRes, found);
+
             return true;
         }
 
