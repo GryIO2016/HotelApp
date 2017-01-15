@@ -18,8 +18,8 @@ namespace HotelApp.ViewModel
     {
         private ObservableCollection<Reservation> reservationList = new ObservableCollection<Reservation>();
         private Reservation selectedReservation;
-        private DateTime startDate;
-        private DateTime endDate;
+        //private DateTime startDate;
+        //private DateTime endDate;
         private ICalendar calendarHandler;
         private IReservationUI reservationHandler;
         private IRoomServiceUI roomServiceHandler;
@@ -51,7 +51,7 @@ namespace HotelApp.ViewModel
             }
         }
 
-        public DateTime StartDate
+        /*public DateTime StartDate
         {
             get
             {
@@ -77,14 +77,14 @@ namespace HotelApp.ViewModel
                 endDate = value;
                 RaisePropertyChanged();
             }
-        }
+        }*/
         public WorkerRSViewModel()
         {
             calendarHandler = new Calendar();
             reservationHandler = new ReservationUIService();
             roomServiceHandler = new RoomServiceUIMethods();
-            startDate = DateTime.Now.AddDays(-14);
-            endDate = DateTime.Now.AddMonths(1);
+            //startDate = DateTime.Now.AddDays(-14);
+            //endDate = DateTime.Now.AddMonths(1);
             Refresh = new RelayCommand(RefreshCommand);
             Accept = new RelayCommand(AcceptCommand);
             Cancel = new RelayCommand(CancelCommand);
