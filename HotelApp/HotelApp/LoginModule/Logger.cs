@@ -56,6 +56,20 @@ namespace HotelApp.LoginModule
                 return false;
             }
         }
+        public bool EditUser(User oldUser, string name, string lastName, DateTime birthDate, string phone, string email, string pesel, EnumHelper.Role role)
+        {
+            User user = dataBase.findUser(oldUser.Email);
+            if (user != null)
+            {
+                User newUser = new User(name, lastName, birthDate, phone, email, oldUser.Password, pesel, role);
+                dataBase.editUser(oldUser, newUser);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public List<User> ListUsers()
         {
             List<User> lista = new List<User>();
