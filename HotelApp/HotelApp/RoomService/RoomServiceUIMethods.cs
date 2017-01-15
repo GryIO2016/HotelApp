@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HotelApp.Database;
+using HotelApp.Timetable;
 
 namespace HotelApp.RoomService
 {
@@ -11,7 +12,15 @@ namespace HotelApp.RoomService
     {
         public bool acceptReservation(Reservation res)
         {
-            throw new NotImplementedException();
+            ICalendar c = new Calendar();
+            try
+            {
+                c.addReservation(res);
+                return true;
+            } catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public bool editReservation()
