@@ -85,6 +85,36 @@ namespace HotelApp.Database
             return fRrooms;
         }
 
+        public List<Room> getAllRooms()
+        {
+            List<Room> fRrooms = new List<Room>();
+
+            try
+            {
+                using (var Conn = new IO2017Entities())
+                {
+                    var find = from d in Conn.rooms
+                               select d;
+
+
+
+                    foreach (var qq in find)
+                    {
+                        fRrooms.Add(new Room(qq.room_id, qq.number, (double)qq.price, qq.smoking, qq.pets, (EnumHelper.BedType)qq.bed_type, (EnumHelper.Status)qq.room_status));
+                    }
+                }
+            }
+
+            catch
+            {
+                return null;
+            }
+
+
+
+            return fRrooms;
+        }
+
         public void editReservation(Reservation oldReservation, Reservation newReservation)
         {
 
@@ -379,5 +409,7 @@ namespace HotelApp.Database
                 }
             }
         }
+
+
     }
 }
