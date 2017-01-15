@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" Tag="ObsługaRezerwacji" DataContext="{Binding WorkerRS, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
-        <ListView x:Name="listOfReservations" HorizontalAlignment="Left" Height="210" Margin="100,45,0,0" VerticalAlignment="Top" Width="400" ItemsSource="{Binding Rezerwacje}" >
+        <ListView x:Name="listOfReservations" HorizontalAlignment="Left" Height="210" Margin="100,45,0,0" VerticalAlignment="Top" Width="400" ItemsSource="{Binding Rezerwacje}" SelectedItem="{Binding SelectedReservation}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="E-mail Rezerwującego" Width="130" DisplayMemberBinding="{Binding User.Email}"/>

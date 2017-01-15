@@ -97,7 +97,7 @@ namespace HotelApp.ViewModel
         {
             reservationList.Clear();
             List<Reservation> temp;
-            temp = calendarHandler.getReservations(startDate, endDate);
+            temp = roomServiceHandler.getAllReservations();
             foreach (Reservation r in temp)
             {
                 if (r.Confirmed == false && r.Canceled == false)
@@ -108,7 +108,7 @@ namespace HotelApp.ViewModel
         }
         private void AcceptCommand()
         {
-            roomServiceHandler.acceptReservation(selectedReservation);
+            roomServiceHandler.acceptReservation(SelectedReservation);
             RefreshCommand();
         }
         private void CancelCommand()
