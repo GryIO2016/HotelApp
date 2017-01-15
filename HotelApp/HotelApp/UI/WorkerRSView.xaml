@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600" Tag="ObsługaRezerwacji" DataContext="{Binding WorkerRS, Mode=OneWay, Source={StaticResource Locator}}">
     <Grid>
-        <ListView x:Name="listOfReservations" HorizontalAlignment="Left" Height="245" Margin="100,10,0,0" VerticalAlignment="Top" Width="400" ItemsSource="{Binding Rezerwacje}" >
+        <ListView x:Name="listOfReservations" HorizontalAlignment="Left" Height="210" Margin="100,45,0,0" VerticalAlignment="Top" Width="400" ItemsSource="{Binding Rezerwacje}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="E-mail Rezerwującego" Width="130" DisplayMemberBinding="{Binding User.Email}"/>
@@ -22,6 +22,10 @@
         <Button x:Name="button" Content="Odświerz" HorizontalAlignment="Left" Margin="100,265,0,0" VerticalAlignment="Top" Width="75" Command="{Binding Refresh, Mode=OneWay}"/>
         <Button x:Name="button1" Content="Odrzuć Rezerwacje" HorizontalAlignment="Left" Margin="180,265,0,0" VerticalAlignment="Top" Width="156" Command="{Binding Cancel, Mode=OneWay}"/>
         <Button x:Name="button1_Copy" Content="Akceptuj Rezerwacje" HorizontalAlignment="Left" Margin="341,265,0,0" VerticalAlignment="Top" Width="159" Command="{Binding Accept, Mode=OneWay}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="134,10,0,0" VerticalAlignment="Top" Width="150" DisplayDate="{Binding StartDate}" SelectedDate="{Binding StartDate}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="341,10,0,0" VerticalAlignment="Top" Width="159" DisplayDate="{Binding EndDate}" SelectedDate="{Binding EndDate}"/>
+        <Label x:Name="label" Content="Od:" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Do:" HorizontalAlignment="Left" Margin="307,10,0,0" VerticalAlignment="Top"/>
 
 
 

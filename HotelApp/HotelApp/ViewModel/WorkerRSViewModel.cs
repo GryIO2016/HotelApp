@@ -82,6 +82,7 @@ namespace HotelApp.ViewModel
         {
             calendarHandler = new Calendar();
             reservationHandler = new ReservationUIService();
+            roomServiceHandler = new RoomServiceUIMethods();
             startDate = DateTime.Now.AddDays(-14);
             endDate = DateTime.Now.AddMonths(1);
             Refresh = new RelayCommand(RefreshCommand);
