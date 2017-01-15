@@ -7,7 +7,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              DataContext="{Binding Reserve, Source={StaticResource Locator}}" 
-             d:DesignHeight="350" d:DesignWidth="500" Tag="Rezerwacje">
+             d:DesignHeight="350" d:DesignWidth="600" Tag="Rezerwacje">
     <Grid>
         <DatePicker HorizontalAlignment="Left" Margin="135,21,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckinDate}" Width="120"/>
         <DatePicker HorizontalAlignment="Left" Margin="135,63,0,0" VerticalAlignment="Top" SelectedDate="{Binding CheckoutDate}" Width="120"/>
@@ -29,15 +29,17 @@
         <Label x:Name="label5" Content="Cena max:" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label6" Content="Cena min:" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="Wyświetl liste pokoi" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="245" Command="{Binding RoomList, Mode=OneWay}" RenderTransformOrigin="0.596,1.664"/>
-        <ListView x:Name="ListRooms" HorizontalAlignment="Left" Height="244" Margin="260,22,0,0" VerticalAlignment="Top" Width="230" ItemsSource="{Binding ListOfRooms}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedRooms}">
+        <ListView x:Name="ListRooms" HorizontalAlignment="Left" Height="244" Margin="260,22,0,0" VerticalAlignment="Top" Width="330" ItemsSource="{Binding ListOfRooms}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedRooms}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nr" Width="40" DisplayMemberBinding="{Binding Number}"/>
-                    <GridViewColumn Header="BedType" Width="115" DisplayMemberBinding="{Binding BedType}"/>
-                    <GridViewColumn Header="Price" Width="70" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Typ Łóżka" Width="120" DisplayMemberBinding="{Binding BedType}"/>
+                    <GridViewColumn Header="Cena" Width="70" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Palący" Width="40" DisplayMemberBinding="{Binding Smoking}"/>
+                    <GridViewColumn Header="Zwierzęta" Width="55" DisplayMemberBinding="{Binding Pets}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="ReserveButton" Content="Zarezerwój Wybrany Pokój" HorizontalAlignment="Left" Margin="260,289,0,0" VerticalAlignment="Top" Width="230" Command="{Binding ReserveRooms, Mode=OneWay}" />
+        <Button x:Name="ReserveButton" Content="Zarezerwój Wybrany Pokój" HorizontalAlignment="Left" Margin="260,289,0,0" VerticalAlignment="Top" Width="330" Command="{Binding ReserveRooms, Mode=OneWay}" />
     </Grid>
 </UserControl>

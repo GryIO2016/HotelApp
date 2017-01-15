@@ -23,7 +23,6 @@ namespace HotelApp.ViewModel
         private ICalendar calendarHandler;
         private IReservationUI reservationHandler;
         private IRoomServiceUI roomServiceHandler;
-
         public ObservableCollection<Reservation> Rezerwacje
         {
             get
