@@ -12,6 +12,6 @@ namespace HotelApp.LoginModule
         User LogIn(string email, string password);
         List<User> ListUsers();
         bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role);
-        bool EditUser(User oldUser, User newUser);
+        bool EditUser(User oldUser, string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role);
     }
 }

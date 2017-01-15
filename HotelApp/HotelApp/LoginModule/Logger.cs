@@ -19,8 +19,8 @@ namespace HotelApp.LoginModule
         }
         public User LogIn(string email, string password)
         {
-            string haslo = haszer.Encode(password);
-            User user = dataBase.findUser(email, haslo);
+            password = haszer.Encode(password);
+            User user = dataBase.findUser(email, password);
             if (user!=null)
             {
                 return user;
@@ -35,23 +35,25 @@ namespace HotelApp.LoginModule
             }
             else
             {
-                string haslo = haszer.Encode(password);
-                User newUser = new User(name, lastName, birthDate, phone, email, haslo, pesel, role);
+                password = haszer.Encode(password);
+                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
                 dataBase.addUser(newUser);
                 return true;
             }
         }
-        public bool EditUser(User oldUser, User newUser)
+        public bool EditUser(User oldUser, string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
         {
             User user = dataBase.findUser(oldUser.Email);
             if (user != null)
             {
-                return false;
+                password = haszer.Encode(password);
+                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
+                dataBase.editUser(oldUser, newUser);
+                return true;
             }
             else
             {
-                dataBase.editUser(oldUser, newUser);
-                return true;
+                return false;
             }
         }
         public List<User> ListUsers()
