@@ -20,15 +20,15 @@ namespace HotelApp.Timetable
 
         public void editReservation(Reservation oldReservation, Reservation newReservation)
         {
-            if (reservations.Contains(oldReservation))
+            dataBase.editReservation(oldReservation, newReservation);
+            /*if (reservations.Contains(oldReservation))
             {
-                dataBase.editReservation(oldReservation, newReservation);
                 reservations[reservations.IndexOf(oldReservation)] = newReservation;
             }
             else
             {
                 throw new ReservationNotFoundException();
-            }
+            }*/
         }
 
         public List<Room> getFreeRooms(DateTime startDate, DateTime endTime)
