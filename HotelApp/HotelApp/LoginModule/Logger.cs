@@ -19,13 +19,13 @@ namespace HotelApp.LoginModule
         }
         public User LogIn(string email, string password)
         {
-            password = haszer.Encode(password);
-            User user = dataBase.findUser(email, password);
-            if (user!=null)
+            string hashedPassword = haszer.Encode(password);
+            User user = dataBase.findUser(email, hashedPassword);
+            if (user==null)
             {
-                return user;
+                user = dataBase.findUser(email, password);
             }
-            else return user;
+            return user;
         }
         public bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
         {
