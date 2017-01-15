@@ -11,7 +11,7 @@ namespace HotelApp.RoomService
     {
         bool acceptReservation(Reservation res);
         bool editReservation();
-        bool editRoom();
+        bool editRoom(Room oldRoom, Room newRoom);
         String notification();
     }
 }
