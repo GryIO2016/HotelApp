@@ -41,11 +41,7 @@ namespace HotelApp.Timetable
             List<Reservation> temp = new List<Reservation>();
             foreach(Reservation res in reservations)
             {
-                if((res.CheckInDate > startDate && res.CheckOutDate > endDate) || (res.CheckInDate < startDate && res.CheckOutDate < endDate))
-                {
-                    continue;
-                }
-                else
+                if (res.CheckOutDate > startDate && res.CheckInDate < endDate)
                 {
                     temp.Add(res);
                 }
