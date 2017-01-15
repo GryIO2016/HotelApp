@@ -108,11 +108,13 @@ namespace HotelApp.ViewModel
         }
         private void AcceptCommand()
         {
+            if(selectedReservation !=null)
             roomServiceHandler.acceptReservation(SelectedReservation);
             RefreshCommand();
         }
         private void CancelCommand()
         {
+            if(selectedReservation!=null)
             reservationHandler.cancelReservation(selectedReservation.Id, reservationList.ToList<Reservation>());
             RefreshCommand();
         }
