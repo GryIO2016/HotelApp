@@ -13,5 +13,7 @@ namespace HotelApp.RoomService
         bool editReservation();
         bool editRoom(Room oldRoom, Room newRoom);
         String notification();
+        List<Reservation> getReservations(DateTime startDate, DateTime endDate);
+        List<Reservation> getAllReservations();
     }
 }

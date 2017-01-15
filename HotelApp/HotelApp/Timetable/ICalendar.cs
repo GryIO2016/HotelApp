@@ -13,6 +13,7 @@ namespace HotelApp.Timetable
         void editReservation(Reservation oldReservation, Reservation newReservation);
         List<Room> getFreeRooms(DateTime startDate, DateTime endTime);
         List<Reservation> getReservations(DateTime startDate, DateTime endDate);
+        List<Reservation> getAllReservations();
         List<Reservation> getUserReservations(User user);
     }
 }

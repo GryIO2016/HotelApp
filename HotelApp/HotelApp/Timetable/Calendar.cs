@@ -38,8 +38,11 @@ namespace HotelApp.Timetable
 
         public List<Reservation> getReservations(DateTime startDate, DateTime endDate)
         {
+            DBManagment dbm = new DBManagment();
             List<Reservation> temp = new List<Reservation>();
-            foreach(Reservation res in reservations)
+            temp = dbm.getAllReservations();
+
+            foreach (Reservation res in reservations)
             {
                 if (res.CheckOutDate > startDate && res.CheckInDate < endDate)
                 {
@@ -49,10 +52,19 @@ namespace HotelApp.Timetable
             return temp;
         }
 
+        public List<Reservation> getAllReservations()
+        {
+            DBManagment dbm = new DBManagment();
+            List<Reservation> temp = new List<Reservation>();
+            temp = dbm.getAllReservations();
+
+            return temp;
+        }
+
         public List<Reservation> getUserReservations(User user)
         {
             List<Reservation> temp = new List<Reservation>();
-            foreach(Reservation res in reservations)
+            foreach (Reservation res in reservations)
             {
                 if (res.User == user)
                 {

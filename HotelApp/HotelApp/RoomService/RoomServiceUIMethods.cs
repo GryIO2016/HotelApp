@@ -44,6 +44,18 @@ namespace HotelApp.RoomService
             return true;
         }
 
+        public List<Reservation> getAllReservations()
+        {
+            ICalendar c = new Calendar();
+            return c.getAllReservations();
+        }
+
+        public List<Reservation> getReservations(DateTime startDate, DateTime endDate)
+        {
+            ICalendar c = new Calendar();
+            return c.getReservations(startDate, endDate);
+        }
+
         public string notification()
         {
             throw new NotImplementedException();
