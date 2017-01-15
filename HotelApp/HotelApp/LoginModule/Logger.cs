@@ -11,22 +11,30 @@ namespace HotelApp.LoginModule
     {
         private ILogging dataBase = new DBManagment();
         private Hasher haszer = new Hasher();
+
         private bool Exists(string email)
         {
             User test = dataBase.findUser(email);
-            if (test!=null) return true;
+            if (test != null) return true;
             else return false;
         }
+
         public User LogIn(string email, string password)
         {
             string hashedPassword = haszer.Encode(password);
             User user = dataBase.findUser(email, hashedPassword);
-            if (user==null)
+            if (user == null)
+            {
+                hashedPassword = haszer.OldEncode(password);
+                user = dataBase.findUser(email, hashedPassword);
+            }
+            else if (user == null)
             {
                 user = dataBase.findUser(email, password);
             }
             return user;
         }
+
         public bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
         {
             if (Exists(email))
@@ -41,6 +49,7 @@ namespace HotelApp.LoginModule
                 return true;
             }
         }
+
         public bool EditUser(User oldUser, string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
         {
             User user = dataBase.findUser(oldUser.Email);
@@ -56,6 +65,7 @@ namespace HotelApp.LoginModule
                 return false;
             }
         }
+
         public bool EditUser(User oldUser, string name, string lastName, DateTime birthDate, string phone, string email, string pesel, EnumHelper.Role role)
         {
             User user = dataBase.findUser(oldUser.Email);
@@ -70,6 +80,7 @@ namespace HotelApp.LoginModule
                 return false;
             }
         }
+
         public List<User> ListUsers()
         {
             List<User> lista = new List<User>();
