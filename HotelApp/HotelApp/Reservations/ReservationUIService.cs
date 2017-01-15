@@ -34,6 +34,12 @@ namespace HotelApp.Reservations
             try
             {
                 dbm.addReservation(toAdd);
+                foreach (Room r in rooms)
+                {
+                    Room newRoom = r;
+                    newRoom.RoomStatus = EnumHelper.Status.Booking;
+                    dbm.editRoom(r, newRoom);
+                }
             }
             catch (Exception e)
             {
