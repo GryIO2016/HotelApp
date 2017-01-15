@@ -223,13 +223,12 @@ namespace HotelApp.ViewModel
                 MessageBox.Show("Puste pole hasła!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            
-            newUser = new User(id , Name, LstName, BirtDate, Phone, Email, password, Pesel, (EnumHelper.Role)(Role + 1));
-            if(!loginUI.EditUser(oldUser, newUser))
+            if(!loginUI.EditUser(oldUser, Name, LstName, BirtDate, Phone, Email, password, Pesel, (EnumHelper.Role)(Role+1)))
             {
                 MessageBox.Show("Nie udało się zedytować użytkownika!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
+            RefreshCommand();
 
 
         }
