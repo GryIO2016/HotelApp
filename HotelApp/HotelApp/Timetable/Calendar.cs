@@ -40,9 +40,9 @@ namespace HotelApp.Timetable
         {
             DBManagment dbm = new DBManagment();
             List<Reservation> temp = new List<Reservation>();
-            temp = dbm.getAllReservations();
+            //temp = dbm.getAllReservations();
 
-            foreach (Reservation res in reservations)
+            foreach (Reservation res in dbm.getAllReservations())
             {
                 if (res.CheckOutDate > startDate && res.CheckInDate < endDate)
                 {
