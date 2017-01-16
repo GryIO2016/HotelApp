@@ -218,18 +218,31 @@ namespace HotelApp.ViewModel
         }
         private void EditUserCommand(string password)
         {
-            if (string.IsNullOrWhiteSpace(password))
+            if (oldUser == null)
             {
-                MessageBox.Show("Puste pole hasła!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Wybierz użytkowika!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            
-            newUser = new User(id , Name, LstName, BirtDate, Phone, Email, password, Pesel, (EnumHelper.Role)(Role + 1));
-            if(!loginUI.EditUser(oldUser, newUser))
+            if (string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Nie udało się zedytować użytkownika!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (!loginUI.EditUser(oldUser, Name, LstName, BirtDate, Phone, Email, Pesel, (EnumHelper.Role)(Role + 1)))
+                {
+                    MessageBox.Show("Nie udało się zedytować użytkownika!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
 
+                }
             }
+            else
+            {
+                if (!loginUI.EditUser(oldUser, Name, LstName, BirtDate, Phone, Email, password, Pesel, (EnumHelper.Role)(Role + 1)))
+                {
+                    MessageBox.Show("Nie udało się zedytować użytkownika!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                }
+            }
+            selectedUser = null;
+            oldUser = null;
+            RefreshCommand();
+
 
 
         }

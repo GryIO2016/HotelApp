@@ -18,12 +18,11 @@ namespace HotelApp.ViewModel
     {
         private ObservableCollection<Reservation> reservationList = new ObservableCollection<Reservation>();
         private Reservation selectedReservation;
-        private DateTime startDate;
-        private DateTime endDate;
+        //private DateTime startDate;
+        //private DateTime endDate;
         private ICalendar calendarHandler;
         private IReservationUI reservationHandler;
         private IRoomServiceUI roomServiceHandler;
-
         public ObservableCollection<Reservation> Rezerwacje
         {
             get
@@ -52,7 +51,7 @@ namespace HotelApp.ViewModel
             }
         }
 
-        public DateTime StartDate
+        /*public DateTime StartDate
         {
             get
             {
@@ -78,13 +77,14 @@ namespace HotelApp.ViewModel
                 endDate = value;
                 RaisePropertyChanged();
             }
-        }
+        }*/
         public WorkerRSViewModel()
         {
             calendarHandler = new Calendar();
             reservationHandler = new ReservationUIService();
-            startDate = DateTime.Now.AddDays(-14);
-            endDate = DateTime.Now.AddMonths(1);
+            roomServiceHandler = new RoomServiceUIMethods();
+            //startDate = DateTime.Now.AddDays(-14);
+            //endDate = DateTime.Now.AddMonths(1);
             Refresh = new RelayCommand(RefreshCommand);
             Accept = new RelayCommand(AcceptCommand);
             Cancel = new RelayCommand(CancelCommand);
@@ -97,7 +97,7 @@ namespace HotelApp.ViewModel
         {
             reservationList.Clear();
             List<Reservation> temp;
-            temp = calendarHandler.getReservations(startDate, endDate);
+            temp = roomServiceHandler.getAllReservations();
             foreach (Reservation r in temp)
             {
                 if (r.Confirmed == false && r.Canceled == false)
@@ -108,11 +108,13 @@ namespace HotelApp.ViewModel
         }
         private void AcceptCommand()
         {
-            roomServiceHandler.acceptReservation(selectedReservation);
+            if(selectedReservation !=null)
+            roomServiceHandler.acceptReservation(SelectedReservation);
             RefreshCommand();
         }
         private void CancelCommand()
         {
+            if(selectedReservation!=null)
             reservationHandler.cancelReservation(selectedReservation.Id, reservationList.ToList<Reservation>());
             RefreshCommand();
         }

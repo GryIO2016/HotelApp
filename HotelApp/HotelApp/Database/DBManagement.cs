@@ -148,6 +148,44 @@ namespace HotelApp.Database
             }
         }
 
+        public List<Reservation> getAllReservations()
+        {
+            List<Reservation> reservations = new List<Reservation>();
+
+            try
+            {
+                using (var Conn = new IO2017Entities())
+                {
+                    var find = Conn.reservations;
+
+                    foreach (var reservation in find)
+                    {
+                        List<Room> rooms = new List<Room>();
+                        foreach (var r in reservation.rooms)
+                        {
+                            Room room = new Room(r.room_id, r.number, (double)r.price, r.smoking, r.pets, (EnumHelper.BedType)r.bed_type, (EnumHelper.Status)r.room_status);
+                            rooms.Add(room);
+                        }
+
+                        var u = Conn.users
+                            .Where(b => b.user_id == reservation.user_id)
+                            .FirstOrDefault();
+
+                        User user = new User(u.user_id, u.first_name, u.last_name, (DateTime)u.birth_date, u.phone_number, u.email, u.password, u.pesel, (EnumHelper.Role)u.role);
+
+                        reservations.Add(new Reservation(reservation.reservation_id, user, reservation.check_in, reservation.check_out, reservation.confirmed, (double)reservation.paid, (double)reservation.total_price, rooms, reservation.canceled));
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+
+            return reservations;
+        }
+
         public List<Reservation> getReservations(DateTime startDate, DateTime endDate)
         {
             List<Reservation> reservations = new List<Reservation>();

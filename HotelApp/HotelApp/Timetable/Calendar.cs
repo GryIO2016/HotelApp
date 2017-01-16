@@ -20,15 +20,15 @@ namespace HotelApp.Timetable
 
         public void editReservation(Reservation oldReservation, Reservation newReservation)
         {
-            if (reservations.Contains(oldReservation))
+            dataBase.editReservation(oldReservation, newReservation);
+            /*if (reservations.Contains(oldReservation))
             {
-                dataBase.editReservation(oldReservation, newReservation);
                 reservations[reservations.IndexOf(oldReservation)] = newReservation;
             }
             else
             {
                 throw new ReservationNotFoundException();
-            }
+            }*/
         }
 
         public List<Room> getFreeRooms(DateTime startDate, DateTime endTime)
@@ -38,14 +38,13 @@ namespace HotelApp.Timetable
 
         public List<Reservation> getReservations(DateTime startDate, DateTime endDate)
         {
+            DBManagment dbm = new DBManagment();
             List<Reservation> temp = new List<Reservation>();
-            foreach(Reservation res in reservations)
+            //temp = dbm.getAllReservations();
+
+            foreach (Reservation res in dbm.getAllReservations())
             {
-                if((res.CheckInDate > startDate && res.CheckOutDate > endDate) || (res.CheckInDate < startDate && res.CheckOutDate < endDate))
-                {
-                    continue;
-                }
-                else
+                if (res.CheckOutDate > startDate && res.CheckInDate < endDate)
                 {
                     temp.Add(res);
                 }
@@ -53,10 +52,19 @@ namespace HotelApp.Timetable
             return temp;
         }
 
+        public List<Reservation> getAllReservations()
+        {
+            DBManagment dbm = new DBManagment();
+            List<Reservation> temp = new List<Reservation>();
+            temp = dbm.getAllReservations();
+
+            return temp;
+        }
+
         public List<Reservation> getUserReservations(User user)
         {
             List<Reservation> temp = new List<Reservation>();
-            foreach(Reservation res in reservations)
+            foreach (Reservation res in reservations)
             {
                 if (res.User == user)
                 {

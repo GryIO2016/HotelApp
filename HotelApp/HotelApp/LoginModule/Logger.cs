@@ -11,22 +11,40 @@ namespace HotelApp.LoginModule
     {
         private ILogging dataBase = new DBManagment();
         private Hasher haszer = new Hasher();
+
         private bool Exists(string email)
         {
             User test = dataBase.findUser(email);
-            if (test!=null) return true;
+            if (test != null) return true;
             else return false;
         }
+
         public User LogIn(string email, string password)
         {
-            string haslo = haszer.Encode(password);
-            User user = dataBase.findUser(email, haslo);
-            if (user!=null)
+            string hashedPassword = haszer.Encode(password);
+            User user = dataBase.findUser(email, hashedPassword);
+            if (user == null)
             {
-                return user;
+                hashedPassword = haszer.OldEncode(password);
+                user = dataBase.findUser(email, hashedPassword);
+                if (user != null)
+                {
+                    hashedPassword = haszer.Encode(password);
+                    EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
+                }
             }
-            else return user;
+            else if (user == null)                                      
+            {
+                user = dataBase.findUser(email, password);
+                if (user != null)
+                {
+                    hashedPassword = haszer.Encode(password);
+                    EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
+                }
+            }
+            return user;
         }
+
         public bool RegisterUser(string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
         {
             if (Exists(email))
@@ -35,25 +53,44 @@ namespace HotelApp.LoginModule
             }
             else
             {
-                string haslo = haszer.Encode(password);
-                User newUser = new User(name, lastName, birthDate, phone, email, haslo, pesel, role);
+                password = haszer.Encode(password);
+                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
                 dataBase.addUser(newUser);
                 return true;
             }
         }
-        public bool EditUser(User oldUser, User newUser)
+
+        public bool EditUser(User oldUser, string name, string lastName, DateTime birthDate, string phone, string email, string password, string pesel, EnumHelper.Role role)
         {
             User user = dataBase.findUser(oldUser.Email);
             if (user != null)
             {
-                return false;
-            }
-            else
-            {
+                password = haszer.Encode(password);
+                User newUser = new User(name, lastName, birthDate, phone, email, password, pesel, role);
                 dataBase.editUser(oldUser, newUser);
                 return true;
             }
+            else
+            {
+                return false;
+            }
         }
+
+        public bool EditUser(User oldUser, string name, string lastName, DateTime birthDate, string phone, string email, string pesel, EnumHelper.Role role)
+        {
+            User user = dataBase.findUser(oldUser.Email);
+            if (user != null)
+            {
+                User newUser = new User(name, lastName, birthDate, phone, email, oldUser.Password, pesel, role);
+                dataBase.editUser(oldUser, newUser);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public List<User> ListUsers()
         {
             List<User> lista = new List<User>();

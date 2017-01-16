@@ -12,7 +12,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Imię" Width="60" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Nazwisko" Width="80" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Nazwisko" Width="80" DisplayMemberBinding="{Binding LastName}" />
                     <GridViewColumn Header="PESEL" Width="60" DisplayMemberBinding="{Binding Pesel}" />
                     <GridViewColumn Header="E-Mail" Width="90" DisplayMemberBinding="{Binding Email}" />
                     <GridViewColumn Header="DataUr." Width="60" DisplayMemberBinding="{Binding BirthDate}" />

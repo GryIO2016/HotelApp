@@ -150,6 +150,7 @@
     <Compile Include="Reservations\ReservationUIService.cs" />
     <Compile Include="RoomService\IRoomServiceUI.cs" />
     <Compile Include="RoomService\RoomService.cs" />
+    <Compile Include="RoomService\RoomServiceUIMethods.cs" />
     <Compile Include="Statistics\Chart.cs">
       <SubType>Form</SubType>
     </Compile>

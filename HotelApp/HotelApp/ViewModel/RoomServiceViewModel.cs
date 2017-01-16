@@ -26,7 +26,8 @@ namespace HotelApp.ViewModel
         ObservableCollection<Room> roomList = new ObservableCollection<Room>();
         Room selectedRoom;
         ICalendar calendarHandler = new Calendar();
-        IRoomServiceUI roomServiceHendler; 
+        IRoomServiceUI roomServiceHendler;
+        DBManagment dbConnect = new DBManagment();
         int id;
         public bool Smoking
         {
@@ -142,6 +143,7 @@ namespace HotelApp.ViewModel
         public RoomServiceViewModel()
         {
             RefreshCommand();
+            roomServiceHendler = new RoomServiceUIMethods();
             Refresh = new RelayCommand(RefreshCommand);
             SelectRoom = new RelayCommand(SelectRoomCommand);
             EditRoom = new RelayCommand(AcceptCommand);
@@ -154,7 +156,7 @@ namespace HotelApp.ViewModel
         private void RefreshCommand()
         {
             roomList.Clear();
-            calendarHandler.getFreeRooms(DateTime.Now, DateTime.Now.AddDays(1)).ForEach(roomList.Add);
+            dbConnect.getAllRooms().ForEach(roomList.Add);
 
         }
         private void SelectRoomCommand()
@@ -167,10 +169,13 @@ namespace HotelApp.ViewModel
             BedType = (int)selectedRoom.BedType - 1;
             Status = (int)selectedRoom.RoomStatus - 1;
             id = selectedRoom.Id;
+            RefreshCommand();
         }
         private void AcceptCommand()
         {
-            MessageBox.Show("RoomService niezaimplementowany!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+            Room newRoom = new Room(id, Number, Price, Smoking, Pets, (EnumHelper.BedType)BedType + 1, (EnumHelper.Status)Status + 1);
+            roomServiceHendler.editRoom(oldRoom, newRoom);
+            RefreshCommand();
         }
 
 
