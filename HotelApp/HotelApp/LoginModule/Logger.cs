@@ -28,9 +28,11 @@ namespace HotelApp.LoginModule
                 hashedPassword = haszer.OldEncode(password);
                 user = dataBase.findUser(email, hashedPassword);
             }
-            else if (user == null)
+            else if (user == null)                                      
             {
                 user = dataBase.findUser(email, password);
+                hashedPassword = haszer.Encode(password);               //Haszujemy niezahaszowane hasła finalną metodą haszującą
+                EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
             }
             return user;
         }
