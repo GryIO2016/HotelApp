@@ -68,7 +68,7 @@
           <Property Name="last_name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="birth_date" Type="smalldatetime" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="phone_number" Type="varchar" MaxLength="20" />
           <Property Name="pesel" Type="varchar" MaxLength="15" />
           <Property Name="role" Type="int" Nullable="false" />
@@ -245,7 +245,7 @@
           <Property Name="last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="birth_date" Type="DateTime" Precision="0" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pesel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="Int32" Nullable="false" />
