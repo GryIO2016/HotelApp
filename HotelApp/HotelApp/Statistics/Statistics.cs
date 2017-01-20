@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HotelApp.Database;
+using HotelApp.Timetable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace HotelApp.Statistics
 {
-    public class Statistics 
+    public class Statistics : IStatistics
     {
         DateTime startDate;
         DateTime endDate;
         List<double> statData=new List<double>();
         int categoryID;
         bool notInitialized;
-        IStatistics interfejs;
+        ICalendar calendar;
 
         public DateTime StartDate {
             get
@@ -58,7 +60,7 @@ namespace HotelApp.Statistics
         public Statistics ()
         {
             notInitialized = true;
-            interfejs = new IStatisticsImplementation();
+            calendar = new Calendar();
         }
 
         public void updateData()
@@ -66,17 +68,57 @@ namespace HotelApp.Statistics
             statData.Clear();
             if (notInitialized)
             {
-                interfejs.getDailyIncome(this);
+                getDailyIncome();
                 notInitialized = false;
             }
             else {
                 switch (categoryID)
                 {
-                    case 0: interfejs.getDailyIncome(this); break;
-                    case 1: interfejs.getFreeRooms(this); break;
-                    case 2: interfejs.getRoomVacancy(this); break;
+                    case 0: getDailyIncome(); break;
+                    case 1: getFreeRooms(); break;
+                    case 2: getRoomVacancy(); break;
                     default: break;
                 }
+            }
+        }
+
+        public void getDailyIncome()
+        {
+            DateTime data = this.StartDate;
+            while (data < this.EndDate)
+            {
+                double przychod = 0.0;
+                foreach (Reservation r in calendar.getReservations(this.StartDate, this.EndDate))
+                {
+                    if (r.CheckInDate.Date == data) przychod += r.Paid;
+                }
+                this.StatData.Add(przychod);
+                data = data.AddDays(1.0);
+            }
+        }
+
+        public void getFreeRooms()
+        {
+            DateTime data = this.StartDate;
+            while (data < this.EndDate)
+            {
+                double wolne = 0.0;
+
+                wolne += calendar.getFreeRooms(data, data).Count;
+                this.StatData.Add(wolne);
+                data = data.AddDays(1.0);
+            }
+        }
+
+        public void getRoomVacancy()
+        {
+            DateTime data = this.StartDate;
+            while (data < this.EndDate)
+            {
+                double zajetosc = 0.0;
+                zajetosc += calendar.getReservations(data, data).Count;
+                this.StatData.Add(zajetosc);
+                data = data.AddDays(1.0);
             }
         }
     }

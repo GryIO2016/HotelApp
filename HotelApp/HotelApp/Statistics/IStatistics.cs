@@ -8,8 +8,8 @@ namespace HotelApp.Statistics
 {
     interface IStatistics
     {
-        void getFreeRooms(Statistics stat);
-        void getDailyIncome(Statistics stat);
-        void getRoomVacancy(Statistics stat);
+        void getFreeRooms();
+        void getDailyIncome();
+        void getRoomVacancy();
     }
 }
