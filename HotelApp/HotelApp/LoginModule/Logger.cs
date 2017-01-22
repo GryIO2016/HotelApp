@@ -21,33 +21,21 @@ namespace HotelApp.LoginModule
 
         public User LogIn(string email, string password)
         {
-            string hashedPassword = haszer.Encode(password);
-            User user = dataBase.findUser(email, hashedPassword);
+            User user = dataBase.findUser(email, haszer.Encode(password));
             if (user == null)
             {
-                hashedPassword = haszer.OldEncode(password);
-                user = dataBase.findUser(email, hashedPassword);
+                user = dataBase.findUser(email, haszer.OldEncode(password));
                 if (user != null)
                 {
-                    hashedPassword = haszer.Encode(password);
-                    EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
-                }else
+                    EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, password, user.Pesel, user.Role);
+                }
+                else
                 {
                     user = dataBase.findUser(email, password);
                     if (user != null)
                     {
-                        hashedPassword = haszer.Encode(password);
-                        EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
+                        EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, password, user.Pesel, user.Role);
                     }
-                }
-            }
-            else if (user == null)                                      
-            {
-                user = dataBase.findUser(email, password);
-                if (user != null)
-                {
-                    hashedPassword = haszer.Encode(password);
-                    EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
                 }
             }
             return user;
