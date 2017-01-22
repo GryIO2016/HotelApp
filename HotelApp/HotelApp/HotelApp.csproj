@@ -161,7 +161,6 @@
       <DependentUpon>ChartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Statistics\IStatistics.cs" />
-    <Compile Include="Statistics\IStatisticsImplementation.cs" />
     <Compile Include="Statistics\IStatisticsUI.cs" />
     <Compile Include="Statistics\Statistics.cs" />
     <Compile Include="Statistics\StatisticsUI.cs" />

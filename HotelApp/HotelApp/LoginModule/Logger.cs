@@ -31,6 +31,14 @@ namespace HotelApp.LoginModule
                 {
                     hashedPassword = haszer.Encode(password);
                     EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
+                }else
+                {
+                    user = dataBase.findUser(email, password);
+                    if (user != null)
+                    {
+                        hashedPassword = haszer.Encode(password);
+                        EditUser(user, user.Name, user.LastName, user.BirthDate, user.Phone, user.Email, hashedPassword, user.Pesel, user.Role);
+                    }
                 }
             }
             else if (user == null)                                      
