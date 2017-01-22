@@ -14,5 +14,7 @@ namespace HotelApp.Database
         List<Room> getAllRooms();
         List<Reservation> getReservations(DateTime startDate, DateTime endDate);
         List<Reservation> getUserReservations(User user);
+        Room getRoom(int id);
+        void editRoom(Room oldRoom, Room newRoom);
     }
 }

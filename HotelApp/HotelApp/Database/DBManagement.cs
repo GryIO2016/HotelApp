@@ -257,6 +257,55 @@ namespace HotelApp.Database
             return reservations;
         }
 
+        public Room getRoom(int id)
+        {
+            Room room = new Room();
+
+            try
+            {
+                using (var Conn = new IO2017Entities())
+                {
+                    var r = Conn.rooms
+                    .Where(b => b.room_id == id)
+                    .FirstOrDefault();
+
+                    room.Id = r.room_id;
+                    room.Number = r.number;
+                    room.Price = (double)r.price;
+                    room.Smoking = r.smoking;
+                    room.Pets = r.pets;
+                    room.BedType = (EnumHelper.BedType)r.bed_type;
+                    room.RoomStatus = (EnumHelper.Status)r.room_status;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return room;
+        }
+
+        public void editRoom(Room oldRoom, Room newRoom)
+        {
+            using (var Conn = new IO2017Entities())
+            {
+                rooms r = Conn.rooms.Find(oldRoom.Id);
+                if (r != null)
+                {
+                    r.number = newRoom.Number;
+
+                    r.price = (decimal)newRoom.Price;
+                    r.smoking = newRoom.Smoking;
+                    r.pets = newRoom.Pets;
+                    r.bed_type = (int)newRoom.BedType;
+                    r.room_status = (int)newRoom.RoomStatus;
+
+
+                    Conn.SaveChanges();
+                }
+            }
+        }
 
         // ILogging
 
@@ -396,58 +445,5 @@ namespace HotelApp.Database
 
             return userList;
         }
-        // 
-
-        public Room getRoom(int id)
-        {
-            Room room = new Room();
-
-            try
-            {
-                using (var Conn = new IO2017Entities())
-                {
-                    var r = Conn.rooms
-                    .Where(b => b.room_id == id)
-                    .FirstOrDefault();
-
-                    room.Id = r.room_id;
-                    room.Number = r.number;
-                    room.Price = (double)r.price;
-                    room.Smoking = r.smoking;
-                    room.Pets = r.pets;
-                    room.BedType = (EnumHelper.BedType)r.bed_type;
-                    room.RoomStatus = (EnumHelper.Status)r.room_status;
-                }
-            }
-            catch
-            {
-                return null;
-            }
-
-            return room;
-        }
-
-        public void editRoom(Room oldRoom, Room newRoom)
-        {
-            using (var Conn = new IO2017Entities())
-            {
-                rooms r = Conn.rooms.Find(oldRoom.Id);
-                if (r != null)
-                {
-                    r.number = newRoom.Number;
-
-                    r.price = (decimal)newRoom.Price;
-                    r.smoking = newRoom.Smoking;
-                    r.pets = newRoom.Pets;
-                    r.bed_type = (int)newRoom.BedType;
-                    r.room_status = (int)newRoom.RoomStatus;
-
-
-                    Conn.SaveChanges();
-                }
-            }
-        }
-
-
     }
 }
